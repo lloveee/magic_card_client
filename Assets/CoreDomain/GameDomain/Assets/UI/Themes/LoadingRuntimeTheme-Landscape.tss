@@ -1,0 +1,7 @@
+@import url("RuntimeTheme-Default.tss");
+
+@import url("/Assets/CoreDomain/GameDomain/Assets/UI/Uss/LoginScreen.uss");
+@import url("/Assets/CoreDomain/GameDomain/Assets/UI/Uss/InitScreen.uss");
+
+
+VisualElement {}

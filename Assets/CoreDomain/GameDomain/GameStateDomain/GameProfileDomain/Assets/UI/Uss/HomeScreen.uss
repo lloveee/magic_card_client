@@ -1,0 +1,128 @@
+.home__background {
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/MainBg.jpg?fileID=2800000&guid=0beb4ab863a52104fb756e2485bb629b&type=3#MainBg");
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.home__navigation_bar {
+    width: 100%;
+    height: 10%;
+    background-color: rgba(38, 38, 38, 0);
+    background-size: 100% 100%;
+}
+
+.home__body_content {
+    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    flex-grow: 1;
+    top: auto;
+    flex-shrink: 1;
+    flex-basis: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.home__body_char {
+    width: auto;
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/C_Bg_Mask.png?fileID=2800000&guid=4c19b8d7d997b6543900a563f36c6f2b&type=3#C_Bg_Mask");
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgba(234, 234, 234, 0.59);
+    flex-shrink: 0;
+    flex-grow: 1;
+    align-content: flex-end;
+    justify-content: flex-end;
+    align-self: auto;
+    flex-direction: column-reverse;
+}
+
+.home__body_tool {
+    width: 0%;
+}
+
+.home__body_char_c {
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/base_character.png?fileID=2800000&guid=2a78fa76c95c1274593c1707a9e5e323&type=3#base_character");
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    align-self: center;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    top: 0%;
+    left: 0%;
+    flex-grow: 1;
+    flex-direction: column;
+    bottom: 0%;
+    right: 0%;
+}
+
+.home__body_rank_container {
+    position: absolute;
+    flex-grow: 1;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(164, 141, 141, 0);
+    flex-shrink: 1;
+    flex-basis: 50%;
+}
+
+.home__body_rank_icon {
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0);
+    height: 100%;
+    position: absolute;
+    top: 20%;
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/Rank/style_1_25.png?fileID=2800000&guid=d48c158af320cb24b88dc2ac0393fce1&type=3#style_1_25");
+}
+
+.home__body_rank_text {
+    position: absolute;
+    bottom: 3%;
+    align-self: center;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 35px;
+    height: 25%;
+    flex-grow: 1;
+    flex-basis: 100%;
+}
+
+.home__body_btn_container {
+    position: absolute;
+    background-color: rgba(140, 116, 116, 0);
+    width: 50%;
+    height: 100%;
+    flex-grow: 1;
+    flex-basis: 100%;
+    align-self: auto;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.home__body_btn {
+    align-items: center;
+    align-self: auto;
+    width: 100%;
+    height: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 25%;
+}
+
+.home__body_rank {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    align-items: auto;
+    flex-shrink: 1;
+    flex-basis: 50%;
+}

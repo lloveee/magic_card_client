@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/HomeScreen.uss?fileID=7433441132597879392&amp;guid=8c7400cb1ac098b47ae758597646e459&amp;type=3#HomeScreen" />
+    <ui:VisualElement name="home__background" class="home__background" style="flex-grow: 1; background-image: none; flex-shrink: 0;">
+        <ui:VisualElement picking-mode="Ignore" name="home__navigation_bar" class="home__navigation_bar" />
+        <ui:VisualElement name="home__body_content" class="home__body_content" style="flex-grow: 1; height: 100%;">
+            <ui:VisualElement name="home__body_char" class="home__body_char" style="flex-grow: 1;">
+                <ui:VisualElement name="home__body_char_c" class="home__body_char_c" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/Image/ProfilePlayer.renderTexture?fileID=8400000&amp;guid=d1b255d5f25f3bb4d91c773607d3b607&amp;type=2#ProfilePlayer&quot;);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="home__body_tool" class="home__body_tool" style="flex-grow: 1;">
+                <ui:VisualElement name="home__body_rank" class="home__body_rank">
+                    <ui:VisualElement name="home__body_rank_container" class="home__body_rank_container" style="flex-grow: 1;">
+                        <ui:VisualElement name="home__body_rank_icon" class="home__body_rank_icon" style="flex-grow: 1; flex-shrink: 0; height: 50%; position: absolute;" />
+                        <ui:VisualElement name="home__body_rank_text" class="home__body_rank_text" style="width: 50%;">
+                            <ui:Label text="1000" name="rank" enable-rich-text="false" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" />
+                            <ui:Label text="JJWG" name="name" selectable="false" focusable="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" enable-rich-text="false" emoji-fallback-support="false" picking-mode="Ignore" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="home__body_btn" class="home__body_btn" style="flex-grow: 1;">
+                    <ui:VisualElement name="home__body_btn_container" class="home__body_btn_container" style="flex-grow: 1; width: 50%; height: 25%;">
+                        <ui:Button text="开始匹配" double-click-selects-word="false" triple-click-selects-line="false" emoji-fallback-support="false" enable-rich-text="false" name="home__body_btn_startmatch" style="width: 50%; height: auto; font-size: 30px; -unity-font-style: normal;" />
+                        <ui:Button text="取消" double-click-selects-word="false" triple-click-selects-line="false" emoji-fallback-support="false" enable-rich-text="false" name="home__body_btn_cancelmatch" style="width: 50%; height: auto; font-size: 30px; -unity-font-style: normal;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

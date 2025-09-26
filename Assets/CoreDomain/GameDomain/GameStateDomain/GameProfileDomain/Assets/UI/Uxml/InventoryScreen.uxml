@@ -1,0 +1,77 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/InventoryScreen.uss?fileID=7433441132597879392&amp;guid=0f72a418a5c3daa4895cce604ff9bc89&amp;type=3#InventoryScreen" />
+    <ui:VisualElement name="inventory__home_background" picking-mode="Ignore" class="inventory__home_background" style="flex-grow: 1;">
+        <ui:VisualElement name="inventory__navigation_bar" style="flex-grow: 1; flex-basis: 10%;" />
+        <ui:VisualElement name="inventory__container" class="inventory__container" style="flex-grow: 1; flex-basis: 90%;">
+            <ui:VisualElement name="inventory__view" class="inventory__view" style="flex-grow: 1;">
+                <ui:ScrollView horizontal-scroller-visibility="Hidden" touch-scroll-type="Clamped">
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                    <ui:Button text="Button" />
+                </ui:ScrollView>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory__panel" class="inventory__panel" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

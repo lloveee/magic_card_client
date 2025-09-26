@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uss/LoginScreen.uss?fileID=7433441132597879392&amp;guid=6eca20e5c571ca948b7cd8fabef53ac3&amp;type=3#LoginScreen" />
+    <ui:VisualElement name="login__background" class="login__background" style="flex-grow: 1;" />
+    <ui:VisualElement name="login__content" class="login__content" style="flex-grow: 1;">
+        <ui:TextField label="账号" placeholder-text="filler text" name="login__userbar" max-length="16" auto-correction="false" hide-placeholder-on-focus="true" keyboard-type="NumbersAndPunctuation" class="login__userbar" />
+        <ui:TextField label="密码" placeholder-text="filler text" name="login__pwdbar" password="true" max-length="16" hide-placeholder-on-focus="true" class="login__pwdbar" />
+        <ui:Button text="Button" name="login__button" class="login__button" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,35 @@
+.profile_screen__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.safe__area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    align-self: center;
+}
+
+.profile__home_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: visible;
+}
+
+.profile__tab_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.profile__inventory_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+}

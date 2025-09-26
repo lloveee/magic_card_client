@@ -1,0 +1,61 @@
+.tab_screen__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.tab_screen__container {
+    position: absolute;
+    top: 0%;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/sampleBg.png?fileID=2800000&guid=8c819b402cfd38846a5e846412f592d7&type=3#sampleBg");
+    border-left-color: rgb(221, 221, 221);
+    border-right-color: rgb(221, 221, 221);
+    border-top-color: rgb(221, 221, 221);
+    border-bottom-color: rgb(221, 221, 221);
+    border-bottom-width: 5px;
+}
+
+.tab_screen__tab_btn {
+    flex-grow: 0;
+    height: 100%;
+    width: 10%;
+    font-size: 35px;
+    border-top-width: 5px;
+    border-left-color: rgba(248, 148, 202, 0.56);
+    border-right-color: rgba(248, 148, 202, 0.56);
+    border-top-color: rgba(248, 148, 202, 0.56);
+    border-bottom-color: rgba(248, 148, 202, 0.56);
+    border-left-width: 4px;
+    border-right-width: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    text-shadow: 2px 2px 0 rgba(88, 88, 88, 0.22);
+    color: rgb(101, 101, 101);
+    -unity-font-style: normal;
+}
+
+.tab_screen__tab_btn:hover {
+    color: rgb(0, 0, 0);
+    font-size: 38px;
+    transition-property: font-size, color, all;
+    transition-duration: 0.2s, 0.2s, 0.2s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
+    text-shadow: 2px 2px 0 rgb(164, 164, 164);
+    border-top-width: 6px;
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-left-color: rgb(248, 148, 202);
+    border-right-color: rgb(248, 148, 202);
+    border-top-color: rgb(248, 148, 202);
+    border-bottom-color: rgb(248, 148, 202);
+    -unity-font-style: normal;
+}

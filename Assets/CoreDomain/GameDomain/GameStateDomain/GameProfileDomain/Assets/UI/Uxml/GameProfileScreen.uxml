@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="InventoryScreen" src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uxml/InventoryScreen.uxml?fileID=9197481963319205126&amp;guid=4ae2347d621ecd545891a7975ad03134&amp;type=3#InventoryScreen" />
+    <ui:Template name="HomeScreen" src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uxml/HomeScreen.uxml?fileID=9197481963319205126&amp;guid=a71ae445f0af8d0429242330e8940251&amp;type=3#HomeScreen" />
+    <ui:Template name="TabScreen" src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uxml/TabScreen.uxml?fileID=9197481963319205126&amp;guid=06fd59159a6d4ad468a0db959bee5d31&amp;type=3#TabScreen" />
+    <Style src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/GameProfileScreen.uss?fileID=7433441132597879392&amp;guid=4d15dcfd2eb179b42bab4211d3355cae&amp;type=3#GameProfileScreen" />
+    <ui:VisualElement name="profile_screen__background" picking-mode="Ignore" class="profile_screen__background" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/MainBg.jpg?fileID=2800000&amp;guid=0beb4ab863a52104fb756e2485bb629b&amp;type=3#MainBg&quot;);" />
+    <ui:VisualElement name="safe__area" class="safe__area">
+        <ui:Instance template="InventoryScreen" name="InventoryScreen" class="profile__inventory_container" />
+        <ui:Instance template="HomeScreen" name="HomeScreen" class="profile__home_container" />
+        <ui:Instance template="TabScreen" name="TabScreen" picking-mode="Ignore" class="profile__tab_container" />
+    </ui:VisualElement>
+</ui:UXML>

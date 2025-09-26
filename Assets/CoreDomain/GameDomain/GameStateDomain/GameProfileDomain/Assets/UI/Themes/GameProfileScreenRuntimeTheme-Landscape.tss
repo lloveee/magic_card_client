@@ -1,0 +1,9 @@
+@import url("/Assets/CoreDomain/GameDomain/Assets/UI/Themes/RuntimeTheme-Default.tss");
+
+@import url("/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/HomeScreen.uss");
+@import url("/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/GameProfileScreen.uss");
+@import url("/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/InventoryScreen.uss");
+@import url("/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/TabScreen.uss");
+
+
+VisualElement {}
