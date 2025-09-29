@@ -16,12 +16,12 @@ namespace SpacetimeDB.Types
     public sealed partial class ValidateInfo
     {
         [DataMember(Name = "ValidateInfoId")]
-        public uint ValidateInfoId;
+        public string ValidateInfoId;
         [DataMember(Name = "HashCode")]
         public string HashCode;
 
         public ValidateInfo(
-            uint ValidateInfoId,
+            string ValidateInfoId,
             string HashCode
         )
         {
@@ -31,6 +31,7 @@ namespace SpacetimeDB.Types
 
         public ValidateInfo()
         {
+            this.ValidateInfoId = "";
             this.HashCode = "";
         }
     }

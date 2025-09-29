@@ -557,15 +557,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: http://localhost:3000
   module: c-mc
-  useProxy: 0
-  proxyScene: 3
+  useProxy: 1
+  proxyScene: 5
   mockData:
-    rid: 8819333907929628741
+    rid: 8819334019541893188
   references:
     version: 2
     RefIds:
-    - rid: 8819333907929628741
-      type: {class: GameProfileInitiatorEnterData, ns: CoreDomain.GameDomain.Scripts.State.GameProfileState, asm: Assembly-CSharp}
+    - rid: 8819334019541893188
+      type: {class: ManagementInitiatorEnterData, ns: CoreDomain.Scripts.CoreInitiator, asm: Assembly-CSharp}
       data: 
 --- !u!114 &1566769277
 MonoBehaviour:

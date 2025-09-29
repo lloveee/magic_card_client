@@ -19,9 +19,9 @@ namespace SpacetimeDB.Types
         {
             protected override string RemoteTableName => "validate_info";
 
-            public sealed class ValidateInfoIdUniqueIndex : UniqueIndexBase<uint>
+            public sealed class ValidateInfoIdUniqueIndex : UniqueIndexBase<string>
             {
-                protected override uint GetKey(ValidateInfo row) => row.ValidateInfoId;
+                protected override string GetKey(ValidateInfo row) => row.ValidateInfoId;
 
                 public ValidateInfoIdUniqueIndex(ValidateInfoHandle table) : base(table) { }
             }

@@ -27,8 +27,9 @@ namespace SpacetimeDB.Types
             AddTable(BaseCard = new(conn));
             AddTable(CConnection = new(conn));
             AddTable(HeroCard = new(conn));
+            AddTable(MatchContext = new(conn));
             AddTable(PlayerAccount = new(conn));
-            AddTable(UserProfile = new(conn));
+            AddTable(PlayerContext = new(conn));
             AddTable(ValidateInfo = new(conn));
         }
     }
@@ -476,9 +477,11 @@ namespace SpacetimeDB.Types
                 "AuthLogin" => BSATNHelpers.Decode<Reducer.AuthLogin>(encodedArgs),
                 "AuthLogout" => BSATNHelpers.Decode<Reducer.AuthLogout>(encodedArgs),
                 "AuthRegister" => BSATNHelpers.Decode<Reducer.AuthRegister>(encodedArgs),
+                "BulkInsertOrUpdateHeroCard" => BSATNHelpers.Decode<Reducer.BulkInsertOrUpdateHeroCard>(encodedArgs),
                 "ClientConnected" => BSATNHelpers.Decode<Reducer.ClientConnected>(encodedArgs),
                 "ClientDisConnected" => BSATNHelpers.Decode<Reducer.ClientDisConnected>(encodedArgs),
                 "Initialize" => BSATNHelpers.Decode<Reducer.Initialize>(encodedArgs),
+                "InitializePlayerContext" => BSATNHelpers.Decode<Reducer.InitializePlayerContext>(encodedArgs),
                 "PlayerRename" => BSATNHelpers.Decode<Reducer.PlayerRename>(encodedArgs),
                 var reducer => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };
@@ -504,9 +507,11 @@ namespace SpacetimeDB.Types
                 Reducer.AuthLogin args => Reducers.InvokeAuthLogin(eventContext, args),
                 Reducer.AuthLogout args => Reducers.InvokeAuthLogout(eventContext, args),
                 Reducer.AuthRegister args => Reducers.InvokeAuthRegister(eventContext, args),
+                Reducer.BulkInsertOrUpdateHeroCard args => Reducers.InvokeBulkInsertOrUpdateHeroCard(eventContext, args),
                 Reducer.ClientConnected args => Reducers.InvokeClientConnected(eventContext, args),
                 Reducer.ClientDisConnected args => Reducers.InvokeClientDisConnected(eventContext, args),
                 Reducer.Initialize args => Reducers.InvokeInitialize(eventContext, args),
+                Reducer.InitializePlayerContext args => Reducers.InvokeInitializePlayerContext(eventContext, args),
                 Reducer.PlayerRename args => Reducers.InvokePlayerRename(eventContext, args),
                 _ => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };

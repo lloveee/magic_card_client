@@ -28,7 +28,6 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initia
         public Awaitable LoadEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)
         {
             var data = (GameProfileInitiatorEnterData)enterData;
-            Debug.Log(data.CurrentPlayer.Nickname);
             _homeController.InitHomeData(data.CurrentPlayer);
             return AwaitableUtils.CompletedTask;
         }

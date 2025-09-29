@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/CoreDomain/GameDomain/Assets/Scene/GameScene.unity
     guid: 16053cf690db73d47bc2b3cfa54c7c38
   - enabled: 1
+    path: Assets/CoreDomain/ManagementDomain/Assets/Scenes/ManagementScene.unity
+    guid: 026db0882a92b484e9929e5fc059c173
+  - enabled: 1
     path: Assets/CoreDomain/GameDomain/GameStateDomain/GamePlayDomain/Assets/Scenes/GamePlayScene.unity
     guid: 9893c2f244fb556489a7a6da3f5b3174
   - enabled: 1

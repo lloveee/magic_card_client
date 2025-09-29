@@ -21,22 +21,27 @@ namespace SpacetimeDB.Types
         public string CardName;
         [DataMember(Name = "CardDescription")]
         public string CardDescription;
+        [DataMember(Name = "Stats")]
+        public StatsUnion Stats;
 
         public HeroCard(
             uint HeroCardId,
             string CardName,
-            string CardDescription
+            string CardDescription,
+            StatsUnion Stats
         )
         {
             this.HeroCardId = HeroCardId;
             this.CardName = CardName;
             this.CardDescription = CardDescription;
+            this.Stats = Stats;
         }
 
         public HeroCard()
         {
             this.CardName = "";
             this.CardDescription = "";
+            this.Stats = null!;
         }
     }
 }

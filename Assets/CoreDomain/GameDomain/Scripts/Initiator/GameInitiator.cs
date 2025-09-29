@@ -11,7 +11,6 @@ using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
 using CoreDomain.Scripts.Utils;
-using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
 using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;

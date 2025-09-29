@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Threading;
-using CoreDomain.GameDomain.Scripts.State.GameProfileState;
 using CoreDomain.Scripts.CoreInitiator.Base;
 using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
-using CoreDomain.Scripts.Services.StateMachine;
 using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
