@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Uss/TabScreen.uss?fileID=7433441132597879392&amp;guid=9d37049c4c00a3e43a631f7b53e673e2&amp;type=3#TabScreen" />
     <ui:VisualElement name="tab_screen__background" picking-mode="Ignore" class="tab_screen__background" style="flex-grow: 1; position: absolute;" />
-    <ui:VisualElement name="tab_screen__container" class="tab_screen__container" style="flex-grow: 1; height: 10%;">
+    <ui:VisualElement name="tab_screen__container" class="tab_screen__container" style="flex-grow: 1;">
         <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="首页" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
         <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="角色" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
         <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="战绩" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />

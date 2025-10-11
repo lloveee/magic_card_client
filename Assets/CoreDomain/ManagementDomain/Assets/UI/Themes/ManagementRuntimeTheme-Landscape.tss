@@ -1,5 +1,8 @@
 @import url("/Assets/CoreDomain/GameDomain/Assets/UI/Themes/RuntimeTheme-Default.tss");
 
+@import url("/Assets/CoreDomain/ManagementDomain/Assets/UI/Uss/ManagementScreen.uss");
 @import url("/Assets/CoreDomain/ManagementDomain/Assets/UI/Uss/HeroCardManagementScreen.uss");
+
+
 
 VisualElement {}

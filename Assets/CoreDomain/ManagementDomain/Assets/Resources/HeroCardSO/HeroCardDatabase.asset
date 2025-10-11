@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d7305a6a9c4bccbd5137edac7890d7, type: 3}
   m_Name: HeroCardDatabase
   m_EditorClassIdentifier: Assembly-CSharp::CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroCardDatabase
+  url: http://localhost:3000
+  module: c-mc
   data:
   - {fileID: 11400000, guid: c55d2be7f73171442b3110dda355b23e, type: 2}
   - {fileID: 11400000, guid: cde5d3e842451ab4288260005fee240c, type: 2}

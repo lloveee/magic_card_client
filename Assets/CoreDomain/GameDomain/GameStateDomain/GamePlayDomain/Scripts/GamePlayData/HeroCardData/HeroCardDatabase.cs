@@ -64,7 +64,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             {
                 if (e.Status is Status.Failed(var error))
                 {
-                    return;
+                    _logger.Log($"{error}");
                 }
                 else if (e.Status is Status.Committed)
                 {
@@ -74,6 +74,13 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
                     }
                 }
             }
+        }
+        
+        public void RefreshDatabase()
+        {
+            data.Clear();
+            var loadedCards = Resources.LoadAll<HeroCardSO>("");
+            data.AddRange(loadedCards);
         }
         /*
         private void OnDisable()

@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="HeroCardManagementScreen" src="project://database/Assets/CoreDomain/ManagementDomain/Assets/UI/Uxml/HeroCardManagementScreen.uxml?fileID=9197481963319205126&amp;guid=6c6ec2b9904e3f74ebb74b9dfb0efdde&amp;type=3#HeroCardManagementScreen" />
+    <Style src="project://database/Assets/CoreDomain/ManagementDomain/Assets/UI/Uss/ManagementScreen.uss?fileID=7433441132597879392&amp;guid=5d7856eedcf6af149946d0b443272410&amp;type=3#ManagementScreen" />
+    <Style src="project://database/Assets/CoreDomain/ManagementDomain/Assets/UI/Uss/HeroCardManagementScreen.uss?fileID=7433441132597879392&amp;guid=cf980cd0f3990824e87292df330ab2f8&amp;type=3#HeroCardManagementScreen" />
+    <ui:VisualElement name="management__background" picking-mode="Ignore" class="management__background" style="flex-grow: 1;" />
+    <ui:VisualElement name="safe_area" picking-mode="Ignore" class="safe_area" style="flex-grow: 1;">
+        <ui:Instance template="HeroCardManagementScreen" name="HeroCardManagementScreen" class="unity-scroll-view__content-container hero_card__management_screen" />
+    </ui:VisualElement>
+</ui:UXML>

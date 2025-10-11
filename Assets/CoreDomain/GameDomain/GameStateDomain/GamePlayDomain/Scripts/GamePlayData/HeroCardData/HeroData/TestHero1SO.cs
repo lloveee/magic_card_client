@@ -1,4 +1,5 @@
 ﻿using SpacetimeDB.Types;
+using Unity.Properties;
 using UnityEngine;
 
 namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroData
@@ -7,12 +8,13 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
     public class TestHero1SO : HeroCardSO
     {
         private TestHero1Stats Stats;
+        [CreateProperty]
         public uint Heal = 0;
         public override HeroCard TryUpdateData()
         {
             Stats = new TestHero1Stats
             {
-                BaseStats = new PlayerStats(100, 100, 100, 0),
+                BaseStats = new PlayerStats(MaxHealth, CurrentHealth, MaxMana, CurrentMana),
                 Heal = this.Heal
             };
             HeroCard data = new HeroCard

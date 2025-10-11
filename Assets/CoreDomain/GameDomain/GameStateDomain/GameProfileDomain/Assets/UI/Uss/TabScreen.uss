@@ -9,7 +9,7 @@
     top: 0%;
     flex-shrink: 0;
     width: 100%;
-    height: 100%;
+    height: 10%;
     flex-direction: row;
     background-color: rgb(255, 255, 255);
     background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/sampleBg.png?fileID=2800000&guid=8c819b402cfd38846a5e846412f592d7&type=3#sampleBg");
