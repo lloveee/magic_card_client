@@ -483,6 +483,7 @@ namespace SpacetimeDB.Types
                 "Initialize" => BSATNHelpers.Decode<Reducer.Initialize>(encodedArgs),
                 "InitializePlayerContext" => BSATNHelpers.Decode<Reducer.InitializePlayerContext>(encodedArgs),
                 "PlayerRename" => BSATNHelpers.Decode<Reducer.PlayerRename>(encodedArgs),
+                "ReInsertHeroCard" => BSATNHelpers.Decode<Reducer.ReInsertHeroCard>(encodedArgs),
                 "TryValidateHeroCard" => BSATNHelpers.Decode<Reducer.TryValidateHeroCard>(encodedArgs),
                 var reducer => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };
@@ -514,6 +515,7 @@ namespace SpacetimeDB.Types
                 Reducer.Initialize args => Reducers.InvokeInitialize(eventContext, args),
                 Reducer.InitializePlayerContext args => Reducers.InvokeInitializePlayerContext(eventContext, args),
                 Reducer.PlayerRename args => Reducers.InvokePlayerRename(eventContext, args),
+                Reducer.ReInsertHeroCard args => Reducers.InvokeReInsertHeroCard(eventContext, args),
                 Reducer.TryValidateHeroCard args => Reducers.InvokeTryValidateHeroCard(eventContext, args),
                 _ => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };

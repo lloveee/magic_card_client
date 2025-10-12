@@ -28,6 +28,7 @@ namespace CoreDomain.ManagementDomain.Scripts.Initiator
         {
             // Start Finish
             _heroCardDatabase.TryConnectSpacetimeDb();
+            await AwaitableUtils.CompletedTask;
         }
 
         public async Awaitable StartEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)

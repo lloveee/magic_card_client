@@ -5,6 +5,6 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
 {
     public interface IHeroCardManagementController
     {
-        void Initialize(List<HeroCardSO> cards);
+        void Initialize();
     }
 }

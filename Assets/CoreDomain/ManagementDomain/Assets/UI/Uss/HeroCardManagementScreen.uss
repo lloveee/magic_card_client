@@ -125,3 +125,31 @@
 .hero_card_pre__edit_attr > .unity-label {
     -unity-text-align: middle-center;
 }
+
+.hero_card__upload {
+    position: absolute;
+    right: 0%;
+    height: 100%;
+    width: 10%;
+    margin-top: 0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    margin-left: 0%;
+    padding-top: 0%;
+    padding-right: 0%;
+    padding-bottom: 0%;
+    padding-left: 0%;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    font-size: 28px;
+}
+
+.hero_card__re_upload {
+    position: absolute;
+    right: 11%;
+    height: 100%;
+    width: 10%;
+    font-size: 26px;
+}

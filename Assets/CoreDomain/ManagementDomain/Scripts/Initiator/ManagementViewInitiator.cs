@@ -9,18 +9,16 @@ namespace CoreDomain.ManagementDomain.Scripts.Initiator
     public class ManagementViewInitiator : MonoBehaviour
     {
         private IHeroCardManagementController _heroCardManagementController;
-        private HeroCardDatabase _heroCardDatabase;
+        
         [Inject]
-        private void Constructor(IHeroCardManagementController heroCardManagementController
-        , HeroCardDatabase database)
+        private void Constructor(IHeroCardManagementController heroCardManagementController)
         {
             _heroCardManagementController = heroCardManagementController;
-            _heroCardDatabase = database;
         }
 
         private void Start()
         {
-            _heroCardManagementController.Initialize(_heroCardDatabase.data);
+            _heroCardManagementController.Initialize();
         }
     }
 }

@@ -14,15 +14,20 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
 {
     public class HeroCardManagementView : UIView
     {
+        private const string k_HeroCardManagementContainer = "hero_card_management__container";
         private const string k_HeroCardPreviewList = "hero_card_pre__list";
         private const string k_HeroCardPreviewPanel = "hero_card_pre__panel";
         private const string k_HeroCardPreviewAttr = "hero_card_pre__edit_attr";
         private const string k_HeroCardPreviewAttrList = "hero_card_pre__edit_list";
+        private const string k_HeroCardUploadBtn = "hero_card__upload";
+        private const string k_HeroCardReUploadBtn = "hero_card__re_upload";
 
         private VisualElement m_HeroCardContainer;
         private VisualElement m_HeroCardPreviewPanel;
         private ScrollView m_HeroCardPreviewList;
         private ScrollView m_HeroCardPreviewAttrList;
+        private Button m_HeroCardUploadBtn;
+        private Button m_HeroCardReUploadBtn;
 
 
         public HeroCardManagementView(UIDocument document, ILogger logger) : base(document, logger)
@@ -93,6 +98,24 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
         {
             BindingPreviewPanel(card);
         }
+
+        protected override void SetVisualElements()
+        {
+            m_HeroCardContainer = m_TopElement.Q<VisualElement>(k_HeroCardManagementContainer);
+            m_HeroCardUploadBtn = m_TopElement.Q<Button>(k_HeroCardUploadBtn);
+            m_HeroCardReUploadBtn = m_TopElement.Q<Button>(k_HeroCardReUploadBtn);
+        }
+        
+        public void SetupCallbacks(EventCallback<ClickEvent> upload_callback, EventCallback<ClickEvent> re_upload_callback)
+        {
+            m_HeroCardUploadBtn.RegisterCallback(upload_callback);
+            m_HeroCardReUploadBtn.RegisterCallback(re_upload_callback);
+        }
+
+        protected override void RegisterButtonCallbacks()
+        {
+            
+        }
         
         private VisualElement CreateFieldForType(FieldInfo field, HeroCardSO heroCard)
         {
@@ -149,16 +172,6 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
 
             element.AddToClassList(k_HeroCardPreviewAttr);
             return element;
-        }
-
-        protected override void SetVisualElements()
-        {
-            m_HeroCardContainer = m_TopElement.Q<VisualElement>("hero_card_management__container");
-        }
-
-        protected override void RegisterButtonCallbacks()
-        {
-            
         }
     }
 }

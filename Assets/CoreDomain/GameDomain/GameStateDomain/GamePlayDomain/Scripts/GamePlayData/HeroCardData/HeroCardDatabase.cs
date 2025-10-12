@@ -47,17 +47,41 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             _spacetime.LocalIdentity = identity;
             AuthToken.SaveToken(token);
             _logger.Log("Connected Management Admin");
-            
-            TryUpdateData();
+            _spacetime.Conn.Reducers.OnBulkInsertOrUpdateHeroCard += Reducer_OnUpdateHeroCard;
+            _spacetime.Conn.Reducers.OnReInsertHeroCard += Reducer_OnReInsertHeroCard;
+            //TryUpdateData();
         }
 
         public void TryUpdateData()
         {
-            _spacetime.Conn.Reducers.OnBulkInsertOrUpdateHeroCard += Reducer_OnUpdateHeroCard;
             _spacetime.Conn.Reducers.BulkInsertOrUpdateHeroCard(data.Select(d => d.TryUpdateData()).ToList());
         }
 
+        public void TryReUpdateData()
+        {
+            _spacetime.Conn.Reducers.ReInsertHeroCard(data.Select(d => d.TryUpdateData()).ToList());
+        }
+
         private void Reducer_OnUpdateHeroCard(ReducerEventContext ctx, List<HeroCard> cards)
+        {
+            var e = ctx.Event;
+            if (e.CallerIdentity == _spacetime.LocalIdentity)
+            {
+                if (e.Status is Status.Failed(var error))
+                {
+                    _logger.Log($"{error}");
+                }
+                else if (e.Status is Status.Committed)
+                {
+                    foreach (var card in cards)
+                    {
+                        _logger.Log($"{card.HeroCardId} | {card.CardName} | {card.CardDescription} | {card.Stats}");
+                    }
+                }
+            }
+        }
+
+        private void Reducer_OnReInsertHeroCard(ReducerEventContext ctx, List<HeroCard> cards)
         {
             var e = ctx.Event;
             if (e.CallerIdentity == _spacetime.LocalIdentity)
