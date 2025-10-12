@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using CoreDomain.Scripts.Extensions;
 
 namespace CoreDomain.Scripts.Utils
@@ -42,6 +43,13 @@ namespace CoreDomain.Scripts.Utils
 
                 await Awaitable.NextFrameAsync(cancellationToken);
             }
+        }
+        
+        public static TaskCompletionSource<T> CreateLinkedTcs<T>(CancellationToken token)
+        {
+            var tcs = new TaskCompletionSource<T>();
+            token.Register(() => tcs.TrySetCanceled());
+            return tcs;
         }
     }
 }

@@ -19,14 +19,18 @@ namespace SpacetimeDB.Types
         public SpacetimeDB.Identity Identity;
         [DataMember(Name = "IsConnected")]
         public bool IsConnected;
+        [DataMember(Name = "IsValidated")]
+        public bool IsValidated;
 
         public Connection(
             SpacetimeDB.Identity Identity,
-            bool IsConnected
+            bool IsConnected,
+            bool IsValidated
         )
         {
             this.Identity = Identity;
             this.IsConnected = IsConnected;
+            this.IsValidated = IsValidated;
         }
 
         public Connection()

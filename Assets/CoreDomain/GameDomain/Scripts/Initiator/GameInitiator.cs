@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
 using CoreDomain.GameDomain.Scripts.Mvc.Login;
 using CoreDomain.GameDomain.Scripts.State.GamePlayState;
 using CoreDomain.GameDomain.Scripts.State.GameProfileState;
@@ -11,6 +13,7 @@ using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
 using CoreDomain.Scripts.Utils;
+using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
 using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;
@@ -25,13 +28,14 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         private readonly GameProfileState.Factory _gameProfileStateFactory;
         private readonly ISpacetimeServer _spacetimeServer;
         private readonly ILoginController _loginController;
+        private readonly HeroCardDatabase _heroCardDatabase;
         private readonly ILogger _logger;
         
         private const string k_connection = "c_connection";
 
         public GameInitiator(IStateMachineService stateMachineService, ISceneInitiatorsService sceneInitiatorsService
             , GamePlayState.Factory gamePlayStateFactory, GameProfileState.Factory gameProfileStateFactory
-            , ISpacetimeServer spacetimeServer, ILogger logger, ILoginController loginController)
+            , ISpacetimeServer spacetimeServer, ILogger logger, ILoginController loginController, HeroCardDatabase heroCardDatabase)
         {
             _spacetimeServer = spacetimeServer;
             _logger = logger;
@@ -40,20 +44,34 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _stateMachineService = stateMachineService;
             _gamePlayStateFactory = gamePlayStateFactory;
             _gameProfileStateFactory = gameProfileStateFactory;
+            _heroCardDatabase = heroCardDatabase;
             _sceneInitiatorsService.RegisterInitiator(this);
         }
         
         public SceneType SceneType => SceneType.GameScene;
         public async Awaitable LoadEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)
         {
+            //validate data
+            var tcs_data = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
+            _heroCardDatabase.TryValidateData((ctx, list) => Reducer_ValidateData(ctx, list, tcs_data));
+            _logger.Log("validating data...");
+            try
+            {
+                var validated = await tcs_data.Task;
+                if (!validated) return;
+            }
+            catch (TaskCanceledException)
+            {
+                _logger.LogWarning("Data validation canceled");
+                return;
+            }
+            
             var data = (GameInitiatorEnterData)enterData;
             _logger.Log("Freeze input");
             _loginController.HideView();
             string c_connection_sub_query = $"SELECT * FROM {k_connection} c WHERE c.Identity = '{data.LocalIdentity}'";
             
-            var tcs = new TaskCompletionSource<bool>();
-            
-            cancellationTokenSource.Token.Register(() => tcs.TrySetCanceled());
+            var tcs = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
             _spacetimeServer.SubscribeTableWithId(k_connection, new string[]{c_connection_sub_query}
                 , (context) => OnConnectionSubApply(context, tcs)
                 , (errorContext, exception) => OnConnectionSubError(errorContext, exception, tcs));
@@ -65,7 +83,6 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         {
             _logger.LogWarning("Network error");
             tcs.TrySetException(e);
-            //_loginController.UnfreezeInterface();
         }
 
         private void OnConnectionSubApply(SubscriptionEventContext obj, TaskCompletionSource<bool> tcs)
@@ -74,6 +91,25 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _logger.Log("Unfreeze input");
             tcs.TrySetResult(true);
             _loginController.ShowView();
+        }
+
+        private void Reducer_ValidateData(ReducerEventContext ctx, List<HeroCard> cards, TaskCompletionSource<bool> tcs)
+        {
+            var e = ctx.Event;
+            if (e.CallerIdentity == _spacetimeServer.LocalIdentity)
+            {
+                if (e.Status is Status.Failed(var error))
+                {
+                    _logger.Log($"{error}");
+                    tcs.TrySetResult(false);
+                }
+                else if (e.Status is Status.Committed)
+                {
+                    _logger.Log($"data validated");
+                    tcs.TrySetResult(true);
+                }
+            }
+            
         }
 
         public Awaitable StartEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)

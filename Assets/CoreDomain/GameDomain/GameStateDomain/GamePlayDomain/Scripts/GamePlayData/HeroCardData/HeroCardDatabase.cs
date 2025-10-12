@@ -62,6 +62,12 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             _spacetime.Conn.Reducers.ReInsertHeroCard(data.Select(d => d.TryUpdateData()).ToList());
         }
 
+        public void TryValidateData(RemoteReducers.TryValidateHeroCardHandler Reducer_ValidateHeroCard)
+        {
+            _spacetime.Conn.Reducers.OnTryValidateHeroCard += Reducer_ValidateHeroCard;
+            _spacetime.Conn.Reducers.TryValidateHeroCard(data.Select(d => d.TryUpdateData()).ToList());
+        }
+
         private void Reducer_OnUpdateHeroCard(ReducerEventContext ctx, List<HeroCard> cards)
         {
             var e = ctx.Event;

@@ -510,6 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6a540c0a1349d7aef82cd57768c1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroCardDatabase: {fileID: 11400000, guid: 4ad108db297311b4b897f2303ed61831, type: 2}
 --- !u!1 &1566769273
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   url: http://localhost:3000
   module: c-mc
-  useProxy: 1
+  useProxy: 0
   proxyScene: 5
   mockData:
     rid: 8819334019541893188
