@@ -8,6 +8,7 @@ using CoreDomain.GameDomain.Scripts.State.GamePlayState;
 using CoreDomain.GameDomain.Scripts.State.GameProfileState;
 using CoreDomain.Scripts.CoreInitiator;
 using CoreDomain.Scripts.CoreInitiator.Base;
+using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.SceneInitiatorService;
 using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
@@ -51,9 +52,13 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         public SceneType SceneType => SceneType.GameScene;
         public async Awaitable LoadEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)
         {
+            _logger.Log("Freeze input");
+            _loginController.HideView();
+            
             //validate data
             var tcs_data = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
-            _heroCardDatabase.TryValidateData((ctx, list) => Reducer_ValidateData(ctx, list, tcs_data));
+            await _heroCardDatabase.TryLoadRemoteData(cancellationTokenSource);
+            _heroCardDatabase.TryValidateData(cancellationTokenSource, (ctx, list) => Reducer_ValidateData(ctx, list, tcs_data));
             _logger.Log("validating data...");
             try
             {
@@ -67,8 +72,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             }
             
             var data = (GameInitiatorEnterData)enterData;
-            _logger.Log("Freeze input");
-            _loginController.HideView();
+            
             string c_connection_sub_query = $"SELECT * FROM {k_connection} c WHERE c.Identity = '{data.LocalIdentity}'";
             
             var tcs = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
@@ -100,7 +104,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             {
                 if (e.Status is Status.Failed(var error))
                 {
-                    _logger.Log($"{error}");
+                    _logger.Log($"data invalidate{error}");
                     tcs.TrySetResult(false);
                 }
                 else if (e.Status is Status.Committed)

@@ -26,6 +26,7 @@ namespace SpacetimeDB.Types
             AddTable(AuthAccount = new(conn));
             AddTable(BaseCard = new(conn));
             AddTable(CConnection = new(conn));
+            AddTable(DataSignature = new(conn));
             AddTable(HeroCard = new(conn));
             AddTable(MatchContext = new(conn));
             AddTable(PlayerAccount = new(conn));
@@ -485,6 +486,7 @@ namespace SpacetimeDB.Types
                 "PlayerRename" => BSATNHelpers.Decode<Reducer.PlayerRename>(encodedArgs),
                 "ReInsertHeroCard" => BSATNHelpers.Decode<Reducer.ReInsertHeroCard>(encodedArgs),
                 "TryValidateHeroCard" => BSATNHelpers.Decode<Reducer.TryValidateHeroCard>(encodedArgs),
+                "VerifyData" => BSATNHelpers.Decode<Reducer.VerifyData>(encodedArgs),
                 var reducer => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };
         }
@@ -517,6 +519,7 @@ namespace SpacetimeDB.Types
                 Reducer.PlayerRename args => Reducers.InvokePlayerRename(eventContext, args),
                 Reducer.ReInsertHeroCard args => Reducers.InvokeReInsertHeroCard(eventContext, args),
                 Reducer.TryValidateHeroCard args => Reducers.InvokeTryValidateHeroCard(eventContext, args),
+                Reducer.VerifyData args => Reducers.InvokeVerifyData(eventContext, args),
                 _ => throw new ArgumentOutOfRangeException("Reducer", $"Unknown reducer {reducer}")
             };
         }

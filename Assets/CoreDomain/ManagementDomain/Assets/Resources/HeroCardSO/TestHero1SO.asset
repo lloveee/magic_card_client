@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroData.TestHero1SO
   cardName: TestHero1
   description: hero1 change.
-  Heal: 0
+  MaxHealth: 100
+  CurrentHealth: 100
+  MaxMana: 100
+  CurrentMana: 0
+  Heal: 1000

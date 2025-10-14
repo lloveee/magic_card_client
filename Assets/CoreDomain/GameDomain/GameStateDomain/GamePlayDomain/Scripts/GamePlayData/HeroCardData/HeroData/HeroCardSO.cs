@@ -19,6 +19,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
         [CreateProperty]
         public uint CurrentMana = 0;
 
-        public abstract HeroCard TryUpdateData();
+        public abstract HeroCard GetHeroCardData();
+        public abstract void SetHeroCardData(HeroCard heroCardData);
     }
 }

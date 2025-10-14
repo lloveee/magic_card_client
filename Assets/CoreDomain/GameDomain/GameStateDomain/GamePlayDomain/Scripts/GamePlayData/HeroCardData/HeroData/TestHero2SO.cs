@@ -1,4 +1,5 @@
-﻿using SpacetimeDB.Types;
+﻿using CoreDomain.Scripts.Utils;
+using SpacetimeDB.Types;
 using Unity.Properties;
 using UnityEngine;
 
@@ -10,13 +11,17 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
         private TestHero2Stats Stats;
         [CreateProperty]
         public uint Heal = 10;
-        public override HeroCard TryUpdateData()
+        public override HeroCard GetHeroCardData()
         {
-            Stats = new TestHero2Stats
+            if (Stats == null)
             {
-                BaseStats = new PlayerStats(MaxHealth, CurrentHealth, MaxMana, CurrentMana),
-                Heal = this.Heal
-            };
+                Stats = new TestHero2Stats
+                {
+                    BaseStats = new PlayerStats(MaxHealth, CurrentHealth, MaxMana, CurrentMana),
+                    Heal = this.Heal
+                };
+            }
+            
             HeroCard data = new HeroCard
             {
                 CardName = cardName,
@@ -24,6 +29,17 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
                 Stats = new StatsUnion.Hero2(Stats)
             };
             return data;
+        }
+
+        public override void SetHeroCardData(HeroCard heroCardData)
+        {
+            var heroStats = heroCardData.Stats.TryGet<TestHero2Stats>();
+            if (heroStats != null)
+            {
+                Stats = heroStats;
+            }
+            cardName = heroCardData.CardName;
+            description = heroCardData.CardDescription;
         }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroData;
+using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.SpacetimeServer;
+using CoreDomain.Scripts.Utils;
 using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
@@ -18,12 +22,16 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
         [SerializeField] private string module = "c-mc";
         [SerializeField] public List<HeroCardSO> data;
         private ISpacetimeServer _spacetime;
+        private StdbHeroCardDataPersistence _heroCardData;
         private ILogger _logger;
+        
+        private const string k_hero_card_play_load = "data_signature";
 
         [Inject]
-        public void Construct(ISpacetimeServer spacetime, ILogger logger)
+        public void Construct(ISpacetimeServer spacetime, ILogger logger, StdbHeroCardDataPersistence heroCardDataPersistence)
         {
             _spacetime = spacetime;
+            _heroCardData = heroCardDataPersistence;
             _logger = logger;
         }
 
@@ -54,18 +62,80 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
 
         public void TryUpdateData()
         {
-            _spacetime.Conn.Reducers.BulkInsertOrUpdateHeroCard(data.Select(d => d.TryUpdateData()).ToList());
+            _spacetime.Conn.Reducers.BulkInsertOrUpdateHeroCard(data.Select(d => d.GetHeroCardData()).ToList());
         }
 
         public void TryReUpdateData()
         {
-            _spacetime.Conn.Reducers.ReInsertHeroCard(data.Select(d => d.TryUpdateData()).ToList());
+            _spacetime.Conn.Reducers.ReInsertHeroCard(data.Select(d => d.GetHeroCardData()).ToList());
         }
 
-        public void TryValidateData(RemoteReducers.TryValidateHeroCardHandler Reducer_ValidateHeroCard)
+        public async Awaitable TryLoadRemoteData(CancellationTokenSource cancellation)
+        {
+            var play_load = await _heroCardData.Load(cancellation);
+            var tcs = AwaitableUtils.CreateLinkedTcs<bool>(cancellation.Token);
+            _spacetime.Conn.Reducers.OnVerifyData +=(ctx, target, c_data) => Reducer_VerifyData(ctx, target, c_data, tcs);
+            _spacetime.Conn.Reducers.VerifyData("HeroCard", play_load);
+            await tcs.Task;
+        }
+        
+        public void TryValidateData(CancellationTokenSource cancellation, RemoteReducers.TryValidateHeroCardHandler Reducer_ValidateHeroCard)
         {
             _spacetime.Conn.Reducers.OnTryValidateHeroCard += Reducer_ValidateHeroCard;
-            _spacetime.Conn.Reducers.TryValidateHeroCard(data.Select(d => d.TryUpdateData()).ToList());
+            _spacetime.Conn.Reducers.TryValidateHeroCard(data.Select(d => d.GetHeroCardData()).ToList());
+        }
+
+        private void Reducer_VerifyData(ReducerEventContext ctx, string target, string playLoad, TaskCompletionSource<bool> tcs)
+        {
+            var e = ctx.Event;
+            if (e.CallerIdentity == _spacetime.LocalIdentity)
+            {
+                if (e.Status is Status.Failed(var error))
+                {
+                    //load remote data
+                    string data_signature_sub_query =  $"SELECT * FROM {k_hero_card_play_load} c WHERE c.ValidateInfoId = 'HeroCard'";
+                    _spacetime.SubscribeTableWithId(k_hero_card_play_load, new string[]{data_signature_sub_query}
+                    , (context) => OnDataSignatureSub(context, tcs)
+                    , (errorContext, exception) => OnDataSignatureSubError(errorContext, exception, tcs)
+                    );
+                }
+                else if (e.Status is Status.Committed)
+                {
+                    var list  = _heroCardData.ConvertSerializeDataToList(playLoad);
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        data[i].SetHeroCardData(list[i]);
+                    }
+
+                    tcs.TrySetResult(true);
+                    _logger.Log("Update Data from cache");
+                }
+            }
+        }
+
+        private void OnDataSignatureSubError(ErrorContext ctx, Exception e, TaskCompletionSource<bool> tcs)
+        {
+            _logger.LogWarning("Network error");
+            tcs.TrySetException(e);
+        }
+
+        private void OnDataSignatureSub(SubscriptionEventContext context, TaskCompletionSource<bool> tcs)
+        {
+            _logger.Log("Subscription data_signature applied");
+            var dataSignature = context.Db.DataSignature.ValidateInfoId.Find("HeroCard");
+            if (dataSignature != null)
+            {
+                _heroCardData.Save(dataSignature.PlayLoad);
+                var list = _heroCardData.ConvertSerializeDataToList(dataSignature.PlayLoad);
+                for (int i = 0; i < data.Count; i++)
+                {
+                    data[i].SetHeroCardData(list[i]);
+                }
+                //
+                _logger.Log("Update Data From Remote");
+            }
+            
+            tcs.TrySetResult(true);
         }
 
         private void Reducer_OnUpdateHeroCard(ReducerEventContext ctx, List<HeroCard> cards)

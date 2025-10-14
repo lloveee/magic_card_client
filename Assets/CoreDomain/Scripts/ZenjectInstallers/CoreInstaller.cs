@@ -1,8 +1,10 @@
 ﻿using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
 using CoreDomain.Scripts.Services.CommandFactory;
+using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.Logger;
 using CoreDomain.Scripts.Services.SceneInitiatorService;
 using CoreDomain.Scripts.Services.SceneService;
+using CoreDomain.Scripts.Services.Serializer;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
 using UnityEngine;
@@ -21,6 +23,8 @@ namespace CoreDomain.Scripts.ZenjectInstallers
             Container.Bind<IStateMachineService>().To<StateMachineService>().AsSingle().NonLazy();
             Container.Bind<ICommandFactory>().To<CommandFactory>().AsSingle().CopyIntoAllSubContainers().NonLazy();
             Container.Bind<HeroCardDatabase>().FromScriptableObject(heroCardDatabase).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<StdbStdbSerializerService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<StdbHeroCardDataPersistence>().AsSingle().NonLazy();
             Container.BindInterfacesTo<SpacetimeServer>().AsSingle().NonLazy();
             Container.BindInterfacesTo<SceneInitiatorsService>().AsSingle().NonLazy();
         }
