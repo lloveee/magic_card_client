@@ -8,6 +8,7 @@ using CoreDomain.GameDomain.Scripts.State.GamePlayState;
 using CoreDomain.GameDomain.Scripts.State.GameProfileState;
 using CoreDomain.Scripts.CoreInitiator;
 using CoreDomain.Scripts.CoreInitiator.Base;
+using CoreDomain.Scripts.Mvc.Loading;
 using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.SceneInitiatorService;
 using CoreDomain.Scripts.Services.SceneService;
@@ -29,6 +30,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         private readonly GameProfileState.Factory _gameProfileStateFactory;
         private readonly ISpacetimeServer _spacetimeServer;
         private readonly ILoginController _loginController;
+        private readonly ILoadingController _loadingController;
         private readonly HeroCardDatabase _heroCardDatabase;
         private readonly ILogger _logger;
         
@@ -36,7 +38,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
 
         public GameInitiator(IStateMachineService stateMachineService, ISceneInitiatorsService sceneInitiatorsService
             , GamePlayState.Factory gamePlayStateFactory, GameProfileState.Factory gameProfileStateFactory
-            , ISpacetimeServer spacetimeServer, ILogger logger, ILoginController loginController, HeroCardDatabase heroCardDatabase)
+            , ISpacetimeServer spacetimeServer, ILogger logger, ILoginController loginController, HeroCardDatabase heroCardDatabase, ILoadingController loadingController)
         {
             _spacetimeServer = spacetimeServer;
             _logger = logger;
@@ -46,6 +48,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _gamePlayStateFactory = gamePlayStateFactory;
             _gameProfileStateFactory = gameProfileStateFactory;
             _heroCardDatabase = heroCardDatabase;
+            _loadingController = loadingController;
             _sceneInitiatorsService.RegisterInitiator(this);
         }
         
@@ -54,7 +57,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         {
             _logger.Log("Freeze input");
             _loginController.HideView();
-            
+            _loadingController.SetInfo("Validating data ...");
             //validate data
             var tcs_data = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
             await _heroCardDatabase.TryLoadRemoteData(cancellationTokenSource);
@@ -67,10 +70,12 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             }
             catch (TaskCanceledException)
             {
+                _loadingController.SetInfo("Data validation Cancelled!");
                 _logger.LogWarning("Data validation canceled");
                 return;
             }
-            
+
+            await Task.Delay(1000);
             var data = (GameInitiatorEnterData)enterData;
             
             string c_connection_sub_query = $"SELECT * FROM {k_connection} c WHERE c.Identity = '{data.LocalIdentity}'";
@@ -85,7 +90,8 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         
         private void OnConnectionSubError(ErrorContext ctx, Exception e, TaskCompletionSource<bool> tcs)
         {
-            _logger.LogWarning("Network error");
+            _loadingController.SetInfo("Network error!");
+            //_logger.LogWarning("Network error");
             tcs.TrySetException(e);
         }
 
@@ -93,6 +99,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         {
             _logger.Log("Subscription c_connection applied");
             _logger.Log("Unfreeze input");
+            _loadingController.SetInfo("");
             tcs.TrySetResult(true);
             _loginController.ShowView();
         }

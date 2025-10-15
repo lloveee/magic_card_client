@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/CoreDomain/Assets/UI/Uss/LoadingScreen.uss?fileID=7433441132597879392&amp;guid=fb7800cfb2c02744dab9312949beac63&amp;type=3#LoadingScreen" />
+    <ui:VisualElement name="loading__background" class="loading__background" style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; position: absolute; align-self: center; background-image: url(&quot;project://database/Assets/CoreDomain/Assets/UI/logo.jpeg?fileID=2800000&amp;guid=628841fedaaa3674c8f27635dfed8cb1&amp;type=3#logo&quot;); height: 615px; width: 615px; top: 25%; left: auto; bottom: auto; right: auto;" />
+    </ui:VisualElement>
+    <ui:Label text="XXXXXX" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" name="loading__info" class="loading__info" />
+    <ui:ProgressBar value="0.5" name="loading__progress" high-value="1" class="loading__progress" />
+</ui:UXML>

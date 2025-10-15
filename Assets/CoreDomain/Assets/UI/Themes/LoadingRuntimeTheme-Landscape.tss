@@ -1,0 +1,5 @@
+@import url("/Assets/CoreDomain/GameDomain/Assets/UI/Themes/RuntimeTheme-Default.tss");
+
+@import url("/Assets/CoreDomain/Assets/UI/Uss/LoadingScreen.uss");
+
+VisualElement {}

@@ -120,6 +120,7 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
                 else if (e.Status is Status.Committed)
                 {
                     SubscribePlayerAccount(username);
+                    _spacetimeServer.Conn.Reducers.OnInitialize -= Reducer_InitializePlayer;
                 }
             }
         }
@@ -144,6 +145,10 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
             HideView();
             m_playerInit_View.Hide();
             _logger.Log($"Logged in ");
+            _spacetimeServer.UnsubscribeTableWithId(k_player_account, context =>
+            {
+                _logger.Log("UnsubTable View");
+            });
             _ = LoadingHome(player);
         }
 

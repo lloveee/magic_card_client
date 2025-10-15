@@ -1,10 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="LoadingScreen" src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uxml/LoadingScreen.uxml?fileID=9197481963319205126&amp;guid=63a84577dbe3ffe45984b550d1d6ed3a&amp;type=3#LoadingScreen" />
     <ui:Template name="InitScreen" src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uxml/InitScreen.uxml?fileID=9197481963319205126&amp;guid=273ca0cd4235803488b8444a159f65c8&amp;type=3#InitScreen" />
     <ui:Template name="LoginScreen" src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uxml/LoginScreen.uxml?fileID=9197481963319205126&amp;guid=18d0002a3aff8d143b5d783dee9a7050&amp;type=3#LoginScreen" />
     <Style src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uss/LoginScreen.uss?fileID=7433441132597879392&amp;guid=6eca20e5c571ca948b7cd8fabef53ac3&amp;type=3#LoginScreen" />
     <Style src="project://database/Assets/CoreDomain/GameDomain/Assets/UI/Uss/InitScreen.uss?fileID=7433441132597879392&amp;guid=8c70f8056c599f24d804cf009c19e1d1&amp;type=3#InitScreen" />
-    <ui:Instance template="LoadingScreen" name="LoadingScreen" style="flex-basis: auto; position: absolute; width: 100%; height: 100%; display: none;" />
     <ui:Instance template="InitScreen" name="InitScreen" style="position: absolute; display: none; width: 100%; height: 100%;" />
     <ui:Instance template="LoginScreen" name="LoginScreen" style="flex-basis: auto; position: absolute; flex-grow: 0; flex-shrink: 1; top: auto; bottom: auto; left: auto; right: auto; width: 100%; height: 100%; display: flex;" />
 </ui:UXML>

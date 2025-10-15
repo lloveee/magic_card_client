@@ -2,6 +2,7 @@
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initiator;
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Home;
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Profile;
+using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Services.Database;
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.SO;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +19,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Zenjec
             Container.BindInterfacesTo<GameProfileInitiator>().AsSingle().NonLazy();
             Container.BindInterfacesTo<ProfileController>().AsSingle().NonLazy();
             Container.BindInterfacesTo<HomeController>().AsSingle().NonLazy();
+            Container.Bind<GameProfileDatabase>().AsSingle().NonLazy();
             Container.Bind<UIDocument>().FromInstance(gameView).AsSingle().NonLazy();
             Container.Bind<HomeScreenView>().AsSingle().NonLazy();
             Container.Bind<RankTextureMapSO>().FromScriptableObject(rankTextureMap).AsSingle().NonLazy();

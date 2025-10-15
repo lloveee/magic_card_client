@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
+using CoreDomain.Scripts.Mvc.Loading;
 using UnityEngine;
 using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;
 
@@ -10,15 +12,22 @@ namespace CoreDomain.Scripts.Services.StateMachine
         public IGameState CurrentState => _currentState;
         private IGameState _currentState = null;
         private ILogger _logger;
+        private readonly ILoadingController _loadingController;
 
-        public StateMachineService(ILogger logger)
+        public StateMachineService(ILogger logger, ILoadingController loadingController)
         {
             _logger = logger;
+            _loadingController = loadingController;
         }
         public async Awaitable EnterInitialState(IGameState initialState, CancellationTokenSource cancellationTokenSource)
         {
             _currentState = initialState;
+            _loadingController.Show();
+            _loadingController.SetProgress(0.5f);
             await _currentState.LoadState(cancellationTokenSource);
+            _loadingController.SetProgress(1);
+            await Task.Delay(500, cancellationTokenSource.Token);
+            _loadingController.Hide();
             await _currentState.StartState(cancellationTokenSource);
         }
 
@@ -39,10 +48,15 @@ namespace CoreDomain.Scripts.Services.StateMachine
                     _logger.LogError("No state to switch from, need to initialize a game state first!");
                     return;
                 }
-
+                _loadingController.Show();
                 await _currentState.ExitState(cancellationTokenSource);
+                _loadingController.SetProgress(0.5f);
+                await Task.Delay(500, cancellationTokenSource.Token);
                 _currentState = nextState;
                 await _currentState.LoadState(cancellationTokenSource);
+                _loadingController.SetProgress(1);
+                await Task.Delay(500, cancellationTokenSource.Token);
+                _loadingController.Hide();
                 await _currentState.StartState(cancellationTokenSource);
                 
             }

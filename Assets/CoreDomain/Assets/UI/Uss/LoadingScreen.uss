@@ -1,0 +1,25 @@
+.loading__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/holofront.png?fileID=2800000&guid=d2da341dba7352f4287e8f812959f32f&type=3#holofront");
+}
+
+.loading__progress {
+    position: absolute;
+    bottom: 5%;
+    width: 70%;
+    align-self: center;
+    height: auto;
+    font-size: 26px;
+    -unity-text-align: upper-center;
+}
+
+.loading__info {
+    font-size: 50px;
+    position: absolute;
+    align-self: center;
+    top: 10%;
+    align-content: center;
+    -unity-text-align: middle-center;
+}

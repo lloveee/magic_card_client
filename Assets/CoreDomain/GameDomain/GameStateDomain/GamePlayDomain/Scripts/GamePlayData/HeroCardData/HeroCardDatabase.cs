@@ -57,7 +57,6 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             _logger.Log("Connected Management Admin");
             _spacetime.Conn.Reducers.OnBulkInsertOrUpdateHeroCard += Reducer_OnUpdateHeroCard;
             _spacetime.Conn.Reducers.OnReInsertHeroCard += Reducer_OnReInsertHeroCard;
-            //TryUpdateData();
         }
 
         public void TryUpdateData()

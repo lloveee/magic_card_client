@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using CoreDomain.Scripts.CoreInitiator.Base;
+using CoreDomain.Scripts.Mvc.Loading;
 using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using SpacetimeDB;
@@ -16,6 +17,7 @@ namespace CoreDomain.Scripts.CoreInitiator
         private ISceneLoaderService _sceneLoaderService;
         private ISpacetimeServer _spacetimeServer;
         private ILogger _logger;
+        private ILoadingController _loadingController;
         [SerializeField] private string url = "http://localhost:3000";
         [SerializeField] private string module = "c-mc";
         [SerializeField] private bool useProxy = false;
@@ -23,18 +25,26 @@ namespace CoreDomain.Scripts.CoreInitiator
         [SerializeReference, SubclassSelector] private IInitiatorEnterData mockData;
 
         [Inject]
-        private void Constructor(ISceneLoaderService sceneLoaderService, ILogger logger, ISpacetimeServer spacetimeServer)
+        private void Constructor(ISceneLoaderService sceneLoaderService, ILogger logger, ISpacetimeServer spacetimeServer, ILoadingController loadingController)
         {
             _spacetimeServer = spacetimeServer;
             _sceneLoaderService = sceneLoaderService;
+            _loadingController = loadingController;
             _logger = logger;
         }
 
         private void Start()
         {
             //_ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken));
+            _loadingController.Initialize();
             if (!useProxy)
+            {
+                _loadingController.SetInfo("Connecting Server ...");
+                _loadingController.SetProgress(0.5f);
+                _loadingController.Show();
                 _spacetimeServer.InitializeConnection(url, module, OnConnected, OnConnectError, OnDisconnected);
+            }
+            
             else
             {
                 _ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken));
@@ -48,6 +58,7 @@ namespace CoreDomain.Scripts.CoreInitiator
 
         private void OnConnectError(Exception e)
         {
+            _loadingController.SetInfo("Connecting Server Error!");
             _logger.LogError(e.Message);
         }
 
@@ -56,6 +67,7 @@ namespace CoreDomain.Scripts.CoreInitiator
             _spacetimeServer.LocalIdentity = identity;
             AuthToken.SaveToken(token);
             _logger.Log("Connected STDB");
+            _loadingController.Hide();
             _ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken), identity);
         }
 
