@@ -6,26 +6,162 @@
 
 .inventory__container {
     flex-direction: row;
+    background-image: none;
+    background-repeat: no-repeat no-repeat;
+    -unity-background-scale-mode: scale-and-crop;
+    background-size: 100% 100%;
+    -unity-slice-type: sliced;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 10%;
+}
+
+.hero_card_pre__item {
+    width: 250px;
+    height: 250px;
+    align-self: auto;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 30px;
+    -unity-text-align: middle-center;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=450365878&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_56");
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.hero_card_pre__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(202, 188, 177);
+}
+
+.hero_card_pre__background:hover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(210, 177, 67);
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.hero_card_pre__image {
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    background-color: rgba(255, 255, 255, 0);
+    align-self: center;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=253151531&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_57");
+}
+
+.hero_card_pre__name {
+    position: absolute;
+    bottom: 0%;
+    align-self: center;
+    font-size: 26px;
+    -unity-text-align: middle-center;
+    width: 100%;
+    height: 25%;
 }
 
 .inventory__view {
     flex-basis: 75%;
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
     flex-grow: 1;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-sine;
     display: flex;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=105505938&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_98");
 }
 
 .inventory__panel {
     flex-basis: 25%;
     flex-grow: 1;
     flex-shrink: 1;
-    background-color: rgb(247, 66, 66);
+    background-color: rgba(0, 66, 66, 0);
     display: flex;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-sine;
     visibility: visible;
     opacity: 1;
     transition-property: all;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=-252670299&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_109");
+}
+
+.inventory_item {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.unity-scroll-view__content-container {
+    justify-content: flex-start;
+    align-self: flex-start;
+    align-content: auto;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 100%;
+    flex-grow: 1;
+}
+
+.inventory__panel_header {
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    height: 100px;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=1224281954&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_100");
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.inventory__panel_header_text {
+    font-size: 35px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    position: absolute;
+    bottom: auto;
+    top: 10px;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0);
+}
+
+.inventory__panel__body {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 90%;
+}
+
+.inventory__panel_set_btn {
+    width: 60%;
+    align-self: center;
+    height: 75px;
+    font-size: 30px;
+}
+
+.inventory_panel__info_item {
+    font-size: 30px;
+    width: 100%;
+    white-space: pre-wrap;
+    -unity-text-align: upper-left;
+    text-overflow: clip;
+    height: auto;
+    align-self: center;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+}
+
+.inventory__view_container {
+}
+
+.inventory__panel__info_container {
 }

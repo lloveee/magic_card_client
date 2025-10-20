@@ -39,9 +39,9 @@ namespace CoreDomain.Scripts.CoreInitiator
             _loadingController.Initialize();
             if (!useProxy)
             {
+                _loadingController.Show();
                 _loadingController.SetInfo("Connecting Server ...");
                 _loadingController.SetProgress(0.5f);
-                _loadingController.Show();
                 _spacetimeServer.InitializeConnection(url, module, OnConnected, OnConnectError, OnDisconnected);
             }
             
@@ -67,7 +67,6 @@ namespace CoreDomain.Scripts.CoreInitiator
             _spacetimeServer.LocalIdentity = identity;
             AuthToken.SaveToken(token);
             _logger.Log("Connected STDB");
-            _loadingController.Hide();
             _ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken), identity);
         }
 
@@ -104,6 +103,7 @@ namespace CoreDomain.Scripts.CoreInitiator
             }
             catch (Exception e)
             {
+                _loadingController.SetInfo(e.Message);
                 _logger.LogError(e.Message);
                 throw;
             }

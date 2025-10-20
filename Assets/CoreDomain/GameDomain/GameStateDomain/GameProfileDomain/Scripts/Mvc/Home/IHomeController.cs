@@ -8,5 +8,6 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Ho
         void InitHomeData(PlayerAccount data);
         void ShowView();
         void HideView();
+        bool IsHidden { get; }
     }
 }

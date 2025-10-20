@@ -1,9 +1,8 @@
 ﻿using System;
 using CoreDomain.Scripts.CoreInitiator.Base;
 using SpacetimeDB.Types;
-using UnityEngine;
 
-namespace CoreDomain.GameDomain.Scripts.State.GameProfileState
+namespace CoreDomain.GameDomain.Scripts.State.GameProfile
 {
     [Serializable]
     public class GameProfileInitiatorEnterData : IInitiatorEnterData

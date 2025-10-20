@@ -7,7 +7,7 @@ namespace CoreDomain.Scripts.Services.DataPersistence
 {
     public interface IDataPersistence
     {
-        public void Save(List<HeroCard> data);
-        public Awaitable<string> Load(CancellationTokenSource cancellationTokenSource);
+        void Save<T>(string id, T data);
+        T Load<T>(string id, T defaultValue = default);
     }
 }

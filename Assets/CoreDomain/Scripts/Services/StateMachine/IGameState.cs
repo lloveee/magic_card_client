@@ -16,6 +16,7 @@ namespace CoreDomain.Scripts.Services.StateMachine
     {
         Lobby,
         GamePlay,
-        Profile
+        Profile,
+        Practice
     }
 }

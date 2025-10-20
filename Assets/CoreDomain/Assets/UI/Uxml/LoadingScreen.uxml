@@ -3,6 +3,6 @@
     <ui:VisualElement name="loading__background" class="loading__background" style="flex-grow: 1;">
         <ui:VisualElement style="flex-grow: 1; position: absolute; align-self: center; background-image: url(&quot;project://database/Assets/CoreDomain/Assets/UI/logo.jpeg?fileID=2800000&amp;guid=628841fedaaa3674c8f27635dfed8cb1&amp;type=3#logo&quot;); height: 615px; width: 615px; top: 25%; left: auto; bottom: auto; right: auto;" />
     </ui:VisualElement>
-    <ui:Label text="XXXXXX" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" name="loading__info" class="loading__info" />
-    <ui:ProgressBar value="0.5" name="loading__progress" high-value="1" class="loading__progress" />
+    <ui:Label text="Magic Card" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" name="loading__info" class="loading__info" />
+    <ui:ProgressBar value="0" name="loading__progress" high-value="1" class="loading__progress" />
 </ui:UXML>

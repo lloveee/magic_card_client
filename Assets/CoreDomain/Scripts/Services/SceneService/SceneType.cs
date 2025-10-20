@@ -7,6 +7,7 @@
         GamePlayScene,
         GameProfileScene,
         LobbyScene,
-        ManagementScene
+        ManagementScene,
+        GamePracticeScene
     }
 }

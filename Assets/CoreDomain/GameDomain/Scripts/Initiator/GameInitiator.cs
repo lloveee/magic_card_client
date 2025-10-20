@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
 using CoreDomain.GameDomain.Scripts.Mvc.Login;
-using CoreDomain.GameDomain.Scripts.State.GamePlayState;
-using CoreDomain.GameDomain.Scripts.State.GameProfileState;
+using CoreDomain.GameDomain.Scripts.State.GamePlay;
+using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using CoreDomain.Scripts.CoreInitiator;
 using CoreDomain.Scripts.CoreInitiator.Base;
 using CoreDomain.Scripts.Mvc.Loading;
@@ -58,6 +58,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _logger.Log("Freeze input");
             _loginController.HideView();
             _loadingController.SetInfo("Validating data ...");
+            _loadingController.SetProgress(0.5f);
             //validate data
             var tcs_data = AwaitableUtils.CreateLinkedTcs<bool>(cancellationTokenSource.Token);
             await _heroCardDatabase.TryLoadRemoteData(cancellationTokenSource);
@@ -74,7 +75,8 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
                 _logger.LogWarning("Data validation canceled");
                 return;
             }
-
+            _loadingController.SetInfo("Connecting player ...");
+            _loadingController.SetProgress(1);
             await Task.Delay(1000);
             var data = (GameInitiatorEnterData)enterData;
             
@@ -101,6 +103,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _logger.Log("Unfreeze input");
             _loadingController.SetInfo("");
             tcs.TrySetResult(true);
+            _loadingController.Hide();
             _loginController.ShowView();
         }
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading;
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Home;
+using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Profile;
 using CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Services.Database;
-using CoreDomain.GameDomain.Scripts.State.GameProfileState;
+using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using CoreDomain.Scripts.CoreInitiator.Base;
 using CoreDomain.Scripts.Services.CommandFactory;
 using CoreDomain.Scripts.Services.SceneInitiatorService;
@@ -17,15 +18,15 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initia
     {
         private readonly ICommandFactory _commandFactory;
         private readonly ISceneInitiatorsService _sceneInitiatorsService;
-        private readonly IHomeController _homeController;
+        private readonly ProfileController _profileController;
         private readonly GameProfileDatabase _gameProfileDatabase;
         private readonly ILogger _logger;
 
-        public GameProfileInitiator(ICommandFactory commandFactory, ISceneInitiatorsService sceneInitiatorsService, IHomeController homeController, 
+        public GameProfileInitiator(ICommandFactory commandFactory, ISceneInitiatorsService sceneInitiatorsService, ProfileController profileController, 
             GameProfileDatabase gameProfileDatabase, ILogger logger)
         {
             _commandFactory = commandFactory;
-            _homeController = homeController;
+            _profileController = profileController;
             _sceneInitiatorsService = sceneInitiatorsService;
             _gameProfileDatabase = gameProfileDatabase;
             _logger = logger;
@@ -45,7 +46,9 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initia
                 }
                 else
                 {
-                    _homeController.InitHomeData(_gameProfileDatabase.Db.CurrentPlayer);
+                    _profileController.InitData(_gameProfileDatabase.Db.CurrentPlayer);
+                    _profileController.InitData(_gameProfileDatabase.Db.HeroCardData, _gameProfileDatabase.Config);
+                    _profileController.RegisterCallbacks();
                     _logger.Log($"{_gameProfileDatabase.Db.CurrentPlayer.Nickname}");
                 }
             }
@@ -63,6 +66,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initia
 
         public async Awaitable ExitEntryPoint(CancellationTokenSource cancellationTokenSource)
         {
+            _profileController.UnregisterCallbacks();
             await _gameProfileDatabase.UnsubRemoteServer(cancellationTokenSource);
             _logger.Log("Unsub... Profile Exit");
             _sceneInitiatorsService.UnregisterInitiator(this);

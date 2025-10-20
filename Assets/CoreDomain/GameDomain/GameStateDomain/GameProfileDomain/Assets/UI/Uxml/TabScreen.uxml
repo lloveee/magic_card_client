@@ -3,7 +3,7 @@
     <ui:VisualElement name="tab_screen__background" picking-mode="Ignore" class="tab_screen__background" style="flex-grow: 1; position: absolute;" />
     <ui:VisualElement name="tab_screen__container" class="tab_screen__container" style="flex-grow: 1;">
         <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="首页" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
-        <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="角色" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
-        <ui:Button name="tab_btn__home" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="战绩" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
+        <ui:Button name="tab_btn__inventory" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="角色" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
+        <ui:Button name="tab_btn__history" triple-click-selects-line="false" double-click-selects-word="false" selectable="false" focusable="false" text="战绩" class="tab_screen__tab_btn" style="background-color: rgba(255, 255, 255, 0); border-bottom-width: 0;" />
     </ui:VisualElement>
 </ui:UXML>

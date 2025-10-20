@@ -5,37 +5,38 @@ using UnityEngine;
 using Zenject;
 using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;
 
-namespace CoreDomain.GameDomain.Scripts.State.GameProfileState
+namespace CoreDomain.GameDomain.Scripts.State.GamePlay
 {
-    public class GameProfileState : BaseGameState<GameProfileInitiatorEnterData>
+    public class GamePlayState : BaseGameState<GamePlayInitiatorEnterData>
     {
         private readonly ISceneLoaderService _sceneLoaderService;
         
-        public GameProfileState(ISceneLoaderService sceneLoaderService, GameProfileInitiatorEnterData enterData, ILogger logger) : base(enterData, logger)
+        public GamePlayState(ISceneLoaderService sceneLoaderService, GamePlayInitiatorEnterData enterData, ILogger logger) : base(enterData, logger)
         {
             _sceneLoaderService = sceneLoaderService;
         }
 
-        public override GameStateType GameStateType => GameStateType.Profile;
+        public override GameStateType GameStateType => GameStateType.GamePlay;
+
         public override async Awaitable LoadState(CancellationTokenSource cancellationTokenSource)
         {
             await base.LoadState(cancellationTokenSource);
-            await _sceneLoaderService.TryLoadScene(SceneType.GameProfileScene, EnterData, cancellationTokenSource);
+            await _sceneLoaderService.TryLoadScene(SceneType.GamePlayScene, EnterData, cancellationTokenSource);
         }
-        
+
         public override async Awaitable StartState(CancellationTokenSource cancellationTokenSource)
         {
             await base.StartState(cancellationTokenSource);
-            await _sceneLoaderService.StartScene(SceneType.GameProfileScene, EnterData, cancellationTokenSource);
+            await _sceneLoaderService.StartScene(SceneType.GamePlayScene, EnterData, cancellationTokenSource);
         }
         
         public override async Awaitable ExitState(CancellationTokenSource cancellationTokenSource)
         {
             await base.ExitState(cancellationTokenSource);
-            await _sceneLoaderService.TryUnloadScene(SceneType.GameProfileScene, cancellationTokenSource);
+            await _sceneLoaderService.TryUnloadScene(SceneType.GamePlayScene, cancellationTokenSource);
         }
-        
-        public class Factory : PlaceholderFactory<GameProfileInitiatorEnterData, GameProfileState>
+
+        public class Factory : PlaceholderFactory<GamePlayInitiatorEnterData, GamePlayState>
         {
             
         }

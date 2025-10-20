@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
+using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroData;
+using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Utils;
-using SpacetimeDB;
-using SpacetimeDB.BSATN;
 using SpacetimeDB.Types;
 using UnityEngine;
 using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;
@@ -16,14 +18,28 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Servic
     {
         private readonly ISpacetimeServer _spacetimeServer;
         private readonly ILogger _logger;
+        private readonly PlayerPrefsDataPersistence _dataPersistence;
         private const string k_player_account = "player_account";
+        private const string k_profile_config = "profile_config";
         public DbContext Db { get; private set; }
+        private event Action<ProfileConfig> OnConfigChanged = delegate { };
+        public ProfileConfig Config { get; set; }
 
-        public GameProfileDatabase(ISpacetimeServer spacetimeServer, ILogger logger)
+        public GameProfileDatabase(ISpacetimeServer spacetimeServer, ILogger logger, HeroCardDatabase heroCardDatabase, PlayerPrefsDataPersistence dataPersistence)
         {
             _spacetimeServer = spacetimeServer;
+            _dataPersistence = dataPersistence;
             _logger = logger;
-            Db = new DbContext();
+            OnConfigChanged += config => _dataPersistence.Save(k_profile_config, config);
+            Db = new DbContext
+            {
+                HeroCardData = heroCardDatabase.data
+            };
+            var loadedConfig = _dataPersistence.Load<ProfileConfig>(k_profile_config);
+            Config = loadedConfig ?? new ProfileConfig();
+            Config.BindChangeHandler(OnConfigChanged);
+            if (Config.CurrentHeroIndex >= heroCardDatabase.data.Count)
+                Config.CurrentHeroIndex = 0;
         }
 
         public async Awaitable<bool> SubRemoteServer(string username, CancellationTokenSource cancellationTokenSource)
@@ -76,6 +92,31 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Servic
         public class DbContext
         {
             public PlayerAccount CurrentPlayer { get; set; }
+            public List<HeroCardSO> HeroCardData { get; set; }
+            public ProfileConfig Config { get; set; }
+        }
+
+        public class ProfileConfig
+        {
+            private int _currentHeroIndex;
+            private event Action<ProfileConfig> _onChanged;
+
+            public void BindChangeHandler(Action<ProfileConfig> onChanged)
+            {
+                _onChanged = onChanged;
+            }
+
+            public int CurrentHeroIndex
+            {
+                get => _currentHeroIndex;
+                set
+                {
+                    if (_currentHeroIndex == value)
+                        return; // 无变化就不触发
+                    _currentHeroIndex = value;
+                    _onChanged?.Invoke(this);
+                }
+            }
         }
     }
 }

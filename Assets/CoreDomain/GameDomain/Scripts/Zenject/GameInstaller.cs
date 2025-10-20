@@ -1,7 +1,7 @@
 ﻿using CoreDomain.GameDomain.Scripts.Initiator;
 using CoreDomain.GameDomain.Scripts.Mvc.Login;
-using CoreDomain.GameDomain.Scripts.State.GamePlayState;
-using CoreDomain.GameDomain.Scripts.State.GameProfileState;
+using CoreDomain.GameDomain.Scripts.State.GamePlay;
+using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;

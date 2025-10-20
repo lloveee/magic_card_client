@@ -17,7 +17,8 @@ namespace CoreDomain.Scripts.Mvc.Controls
             public static string HeroCardPreviewItem = "hero_card_pre__item";
         }
         
-        public event Action<HeroCardSO> OnClicked;
+        public event Action<HeroCardSO, int> OnClicked;
+        public int Index;
         readonly Label m_HeroNameLabel;
         readonly VisualElement m_Background;
         readonly VisualElement m_HeroImage;
@@ -58,7 +59,7 @@ namespace CoreDomain.Scripts.Mvc.Controls
         
         private void OnClick(ClickEvent evt)
         {
-            OnClicked?.Invoke(HeroCardSO);
+            OnClicked?.Invoke(HeroCardSO, Index);
         }
     }
 }

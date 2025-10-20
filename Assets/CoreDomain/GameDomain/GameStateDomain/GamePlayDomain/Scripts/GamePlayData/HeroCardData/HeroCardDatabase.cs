@@ -34,7 +34,8 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             _heroCardData = heroCardDataPersistence;
             _logger = logger;
         }
-
+        
+#if UNITY_EDITOR
         public void TryConnectSpacetimeDb()
         {
             _spacetime.InitializeConnection(url, module, OnConnected, OnConnectError, OnDisconnected);
@@ -68,6 +69,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
         {
             _spacetime.Conn.Reducers.ReInsertHeroCard(data.Select(d => d.GetHeroCardData()).ToList());
         }
+#endif
 
         public async Awaitable TryLoadRemoteData(CancellationTokenSource cancellation)
         {

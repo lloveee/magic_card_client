@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/CoreDomain/ManagementDomain/Assets/UI/Uss/HeroCardManagementScreen.uss?fileID=7433441132597879392&amp;guid=cf980cd0f3990824e87292df330ab2f8&amp;type=3#HeroCardManagementScreen" />
     <ui:VisualElement name="hero_card__container" class="hero_card__container" style="flex-grow: 1;">
         <ui:VisualElement name="navigation_bar" picking-mode="Ignore" class="parent__navigation_bar" style="flex-grow: 1;">
-            <ui:Button text="更新" name="hero_card__upload" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" class="hero_card__upload" />
-            <ui:Button text="覆写" name="hero_card__re_upload" class="hero_card__re_upload" style="font-size: 28px;" />
+            <ui:Button text="更新" name="hero_card__upload" emoji-fallback-support="false" double-click-selects-word="false" triple-click-selects-line="false" display-tooltip-when-elided="false" class="hero_card__upload" style="background-color: rgba(188, 188, 188, 0);" />
+            <ui:Button text="覆写" name="hero_card__re_upload" class="hero_card__re_upload" style="font-size: 28px; background-color: rgba(188, 188, 188, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="hero_card_management__container" picking-mode="Ignore" class="hero_card_management__container" style="flex-grow: 1;">
             <ui:ScrollView mode="Horizontal" class="hero_card_pre__list" style="display: none;">

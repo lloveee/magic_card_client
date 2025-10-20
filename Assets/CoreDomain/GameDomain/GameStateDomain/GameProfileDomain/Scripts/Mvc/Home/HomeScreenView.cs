@@ -14,6 +14,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Ho
         private const string k_Container = "home__body_rank_container";
         private const string k_StartMatchBtn = "home__body_btn_startmatch";
         private const string k_CancelMatchBtn = "home__body_btn_cancelmatch";
+        private const string k_PracticeRoomBtn = "home__body_practice_btn";
 
         private VisualElement m_RankIcon;
         private VisualElement m_Container;
@@ -21,6 +22,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Ho
         private Label m_NameText;
         private Button m_StartMatchBtn;
         private Button m_CancelMatchBtn;
+        private Button m_PracticeRoomBtn;
         
         [Inject]
         public HomeScreenView(UIDocument document, ILogger logger) : base(document, logger)
@@ -71,12 +73,17 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.Ho
             m_NameText = m_TopElement.Q<Label>(k_NameText);
             m_StartMatchBtn = m_TopElement.Q<Button>(k_StartMatchBtn);
             m_CancelMatchBtn = m_TopElement.Q<Button>(k_CancelMatchBtn);
+            m_PracticeRoomBtn = m_TopElement.Q<Button>(k_PracticeRoomBtn);
         }
         
-        public void SetupCallbacks(EventCallback<ClickEvent> start_match_callback, EventCallback<ClickEvent> cancel_match_callback)
+        public void SetupCallbacks(
+            EventCallback<ClickEvent> start_match_callback, 
+            EventCallback<ClickEvent> cancel_match_callback,
+            EventCallback<ClickEvent> practice_callback)
         {
             m_StartMatchBtn.RegisterCallback(start_match_callback);
             m_CancelMatchBtn.RegisterCallback(cancel_match_callback);
+            m_PracticeRoomBtn.RegisterCallback(practice_callback);
         }
 
         protected override void RegisterButtonCallbacks()

@@ -94,7 +94,7 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
             }
         }
         
-        private void OnPreviewElementClicked(HeroCardSO card)
+        private void OnPreviewElementClicked(HeroCardSO card, int _)
         {
             BindingPreviewPanel(card);
         }

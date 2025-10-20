@@ -9,7 +9,7 @@ using ILogger = CoreDomain.Scripts.Services.Logger.ILogger;
 
 namespace CoreDomain.Scripts.Services.DataPersistence
 {
-    public class StdbHeroCardDataPersistence : IDataPersistence
+    public class StdbHeroCardDataPersistence
     {
         private readonly IStdbSerializerService _stdbSerializer;
         private readonly ILogger _logger;

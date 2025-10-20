@@ -1,4 +1,5 @@
-﻿using CoreDomain.Scripts.Utils;
+﻿using System.Collections.Generic;
+using CoreDomain.Scripts.Utils;
 using SpacetimeDB.Types;
 using Unity.Properties;
 using UnityEngine;
@@ -41,6 +42,15 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
             }
             cardName = heroCardData.CardName;
             description = heroCardData.CardDescription;
+        }
+
+        public override List<string> GetSkillDescription()
+        {
+            return new List<string>
+            {
+                "Skill1: [Hero1] xxxxx",
+                "Skill2: [Hero1] xxxxx2"
+            };
         }
     }
 }

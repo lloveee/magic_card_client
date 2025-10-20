@@ -1,5 +1,5 @@
 .login__background {
-    background-image: url("project://database/Assets/Plugins/Demigiant/DemiLib/Core/Editor/Imgs/yellowSquare.png?fileID=2800000&guid=517a5bfe18f2ee04d9925db10be034e2&type=3#yellowSquare");
+    background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/holofront.png?fileID=2800000&guid=d2da341dba7352f4287e8f812959f32f&type=3#holofront");
 }
 
 .login__content {

@@ -6,9 +6,9 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Initia
 {
     public class GameProfileViewInitiator : MonoBehaviour
     {
-        private IProfileController _profileController;
+        private ProfileController _profileController;
         [Inject]
-        private void Constructor(IProfileController profileController)
+        private void Constructor(ProfileController profileController)
         {
             _profileController = profileController;
         }

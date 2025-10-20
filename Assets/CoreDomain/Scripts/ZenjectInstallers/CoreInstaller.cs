@@ -29,8 +29,10 @@ namespace CoreDomain.Scripts.ZenjectInstallers
             Container.BindInterfacesTo<LoadingController>().AsSingle().NonLazy();
             Container.Bind<LoadingView>().AsSingle().NonLazy();
             Container.Bind<UIDocument>().FromInstance(coreViewDocument).AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<StdbStdbSerializerService>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<StdbHeroCardDataPersistence>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<StdbStdbSerializerService>().AsSingle().NonLazy();
+            Container.Bind<StdbHeroCardDataPersistence>().AsSingle().NonLazy();
+            Container.BindInterfacesTo<SerializerService>().AsSingle().NonLazy();
+            Container.Bind<PlayerPrefsDataPersistence>().AsSingle().NonLazy();
             Container.BindInterfacesTo<SpacetimeServer>().AsSingle().NonLazy();
             Container.BindInterfacesTo<SceneInitiatorsService>().AsSingle().NonLazy();
         }

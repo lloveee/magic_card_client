@@ -1,4 +1,5 @@
-﻿using SpacetimeDB.Types;
+﻿using System.Collections.Generic;
+using SpacetimeDB.Types;
 using Unity.Properties;
 using UnityEngine;
 
@@ -21,5 +22,6 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
 
         public abstract HeroCard GetHeroCardData();
         public abstract void SetHeroCardData(HeroCard heroCardData);
+        public abstract List<string> GetSkillDescription();
     }
 }

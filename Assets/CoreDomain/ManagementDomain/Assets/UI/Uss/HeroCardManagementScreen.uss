@@ -27,7 +27,8 @@
     height: 100%;
     left: 0%;
     top: 0%;
-    background-color: rgb(249, 249, 249);
+    background-color: rgba(249, 249, 249, 0);
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=-252670299&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_109");
 }
 
 .hero_card_pre__panel {
@@ -36,19 +37,20 @@
     height: 100%;
     left: 75%;
     top: 0%;
-    background-color: rgb(184, 115, 115);
-    border-left-width: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    border-left-width: 0;
     border-left-color: rgb(255, 255, 255);
-    border-top-width: 10px;
-    border-right-width: 10px;
-    border-bottom-width: 10px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
     border-top-color: rgb(255, 255, 255);
     border-bottom-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=105505938&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_98");
 }
 
 .unity-scroll-view__content-container {
@@ -67,6 +69,8 @@
     margin-left: 10px;
     font-size: 30px;
     -unity-text-align: middle-center;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=450365878&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_56");
+    -unity-background-scale-mode: scale-and-crop;
 }
 
 .hero_card_pre__background {
@@ -93,8 +97,9 @@
     margin-right: 5%;
     margin-bottom: 5%;
     margin-left: 5%;
-    background-color: rgb(242, 68, 68);
+    background-color: rgba(255, 255, 255, 0);
     align-self: center;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=253151531&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_57");
 }
 
 .hero_card_pre__name {
@@ -139,11 +144,12 @@
     padding-right: 0%;
     padding-bottom: 0%;
     padding-left: 0%;
-    border-top-width: 10px;
-    border-right-width: 10px;
-    border-bottom-width: 10px;
-    border-left-width: 10px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     font-size: 28px;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=-128483938&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_99");
 }
 
 .hero_card__re_upload {
@@ -152,4 +158,5 @@
     height: 100%;
     width: 10%;
     font-size: 26px;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=-128483938&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_99");
 }

@@ -25,10 +25,9 @@ namespace CoreDomain.Scripts.Services.StateMachine
             _loadingController.Show();
             _loadingController.SetProgress(0.5f);
             await _currentState.LoadState(cancellationTokenSource);
-            _loadingController.SetProgress(1);
-            await Task.Delay(500, cancellationTokenSource.Token);
-            _loadingController.Hide();
             await _currentState.StartState(cancellationTokenSource);
+            _loadingController.SetProgress(1f);
+            _loadingController.Hide();
         }
 
         public void SwitchState(IGameState nextState)

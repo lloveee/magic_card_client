@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using CoreDomain.GameDomain.Scripts.State.GameProfileState;
+using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using CoreDomain.Scripts.Services.CommandFactory;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
@@ -156,11 +156,6 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         {
             await _stateMachine.EnterInitialState(
                 _gameProfileStateFactory.Create(new GameProfileInitiatorEnterData(player)), new CancellationTokenSource());
-        }
-
-        public void Login(string name, string pwd)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void FreezeInterface()

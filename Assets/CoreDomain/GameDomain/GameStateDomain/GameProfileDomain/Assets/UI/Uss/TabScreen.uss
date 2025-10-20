@@ -59,3 +59,22 @@
     border-bottom-color: rgb(248, 148, 202);
     -unity-font-style: normal;
 }
+
+.tab_screen__tab_btn:hover {
+    color: rgb(0, 0, 0);
+    font-size: 38px;
+    transition-property: font-size, color, all;
+    transition-duration: 0.2s, 0.2s, 0.2s;
+    transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
+    text-shadow: 2px 2px 0 rgb(164, 164, 164);
+    border-top-width: 6px;
+    border-left-width: 6px;
+    border-right-width: 6px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-left-color: rgb(248, 148, 202);
+    border-right-color: rgb(248, 148, 202);
+    border-top-color: rgb(248, 148, 202);
+    border-bottom-color: rgb(248, 148, 202);
+    -unity-font-style: normal;
+}

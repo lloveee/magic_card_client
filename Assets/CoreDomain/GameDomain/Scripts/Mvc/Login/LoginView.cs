@@ -29,6 +29,7 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
             m_TopElement = m_Document.rootVisualElement.Q<VisualElement>(name);
             SetVisualElements();
             RegisterButtonCallbacks();
+            Hide();
         }
 
         protected override void SetVisualElements()

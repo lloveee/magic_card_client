@@ -126,3 +126,12 @@
     flex-shrink: 1;
     flex-basis: 50%;
 }
+
+.home__body_practice_btn {
+    position: absolute;
+    right: 0%;
+    height: 10%;
+    width: 20%;
+    font-size: 36px;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=-1608025455&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_20");
+}

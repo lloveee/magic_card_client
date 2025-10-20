@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
-using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData.HeroData;
+﻿using CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayData.HeroCardData;
 using CoreDomain.Scripts.Services.Logger;
 
 namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
@@ -21,7 +19,9 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
         {
             _view.Initialize(k_HeroCardManagementView, _heroCardDatabase.data);
             _view.BindingPreviewPanel(_heroCardDatabase.data[0]);
+            #if UNITY_EDITOR
             _view.SetupCallbacks(_ => _heroCardDatabase.TryUpdateData(), _ => _heroCardDatabase.TryReUpdateData());
+            #endif
         }
         
     }

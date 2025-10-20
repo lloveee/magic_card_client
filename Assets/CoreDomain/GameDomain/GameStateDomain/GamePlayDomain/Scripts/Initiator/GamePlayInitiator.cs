@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using CoreDomain.GameDomain.Scripts.State.GamePlayState;
+using CoreDomain.GameDomain.Scripts.State.GamePlay;
 using CoreDomain.Scripts.CoreInitiator.Base;
 using CoreDomain.Scripts.Services.CommandFactory;
 using CoreDomain.Scripts.Services.SceneInitiatorService;
