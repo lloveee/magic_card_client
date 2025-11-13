@@ -25,6 +25,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.In
         private Button m_InventorySetActiveButton;
         private GameProfileDatabase.ProfileConfig m_config;
         private int m_CurrentData;
+        private HeroCardPreviewElement _lastPreviewElement = null;
         
         [Inject]
         public InventoryScreenView(UIDocument document, ILogger logger) : base(document, logger)
@@ -49,6 +50,8 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.In
         public void InitData(List<HeroCardSO> data, GameProfileDatabase.ProfileConfig config)
         {
             m_config = config;
+            m_CurrentData = config.CurrentHeroIndex;
+            m_InventorySetActiveButton.SetEnabled(false);
             for (int i = 0; i < data.Count; i++)
             {
                 var cardVisual = new HeroCardPreviewElement
@@ -56,12 +59,15 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.In
                     HeroCardSO = data[i],
                     Index = i
                 };
-                cardVisual.OnClicked += OnPreviewElementClicked;
+                cardVisual.OnClickedHeroCard += OnPreviewElementClickedHeroCard;
                 m_InventoryScrollView.contentContainer.Add(cardVisual);
+                if (m_CurrentData == i)
+                {
+                    _lastPreviewElement = cardVisual;
+                    cardVisual.SetSelected(true);
+                }
             }
-            m_InventorySetActiveButton.SetEnabled(false);
             m_InventorySetActiveButton.clicked += OnSetActive;
-            m_CurrentData = config.CurrentHeroIndex;
             m_InventoryPanelTitle.text = data[m_CurrentData].cardName;
             m_InventoryPanelScrollView.contentContainer.Clear();
             foreach (var skill in data[m_CurrentData].GetSkillDescription())
@@ -72,9 +78,15 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.In
             }
         }
 
-        private void OnPreviewElementClicked(HeroCardSO data, int index)
+        private void OnPreviewElementClickedHeroCard(HeroCardPreviewElement target)
         {
+            if (target == _lastPreviewElement) return;
+            var data = target.HeroCardSO;
+            var index = target.Index;
             m_InventorySetActiveButton.SetEnabled(m_config.CurrentHeroIndex != index);
+            if (_lastPreviewElement != null) _lastPreviewElement.SetSelected(false);
+            _lastPreviewElement = target;
+            target.SetSelected(true);
             m_InventoryPanelTitle.text = data.cardName;
             m_InventoryPanelScrollView.contentContainer.Clear();
             foreach (var skill in data.GetSkillDescription())
@@ -87,9 +99,9 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Mvc.In
         }
 
         private void OnSetActive()
-        
         {
             m_config.CurrentHeroIndex = m_CurrentData;
+            m_InventorySetActiveButton.SetEnabled(false);
         }
     }
 }

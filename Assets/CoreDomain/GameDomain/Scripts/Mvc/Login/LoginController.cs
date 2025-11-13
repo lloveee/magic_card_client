@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading;
 using CoreDomain.GameDomain.Scripts.State.GameProfile;
+using CoreDomain.Scripts.Mvc.Loading;
 using CoreDomain.Scripts.Services.CommandFactory;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
+using Cysharp.Threading.Tasks;
 using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
@@ -20,6 +22,7 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         private readonly ISpacetimeServer _spacetimeServer;
         private readonly ILogger _logger;
         private readonly ICommandFactory _commandFactory;
+        private readonly ILoadingController _loadingController;
         private readonly GameProfileState.Factory _gameProfileStateFactory;
         private readonly IStateMachineService _stateMachine;
         private const string k_player_account = "player_account";
@@ -28,8 +31,9 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         
         [Inject]
         public LoginController(LoginView view,PlayerInitView initView, ISpacetimeServer spacetimeServer, ILogger logger, ICommandFactory commandFactory, 
-            IStateMachineService stateMachine, GameProfileState.Factory gameProfileStateFactory)
+            IStateMachineService stateMachine, GameProfileState.Factory gameProfileStateFactory, ILoadingController loadingController)
         {
+            _loadingController = loadingController;
             m_view = view;
             m_playerInit_View = initView;
             _logger = logger;
@@ -43,6 +47,7 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         {
             m_view.Initialize(k_LoginView);
             m_playerInit_View.Initialize(k_InitView);
+            m_view.Hide();
             m_playerInit_View.Hide();
             SetupCallbacks();
         }
@@ -142,20 +147,28 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
                 });
                 return;
             } 
+            LoadingHome(player).Forget();
+        }
+
+        private async UniTask LoadingHome(PlayerAccount player)
+        {
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken);
+            await _loadingController.ShowOverlay(cts);
             HideView();
             m_playerInit_View.Hide();
             _logger.Log($"Logged in ");
+            _loadingController.Show();
+            await _loadingController.HideOverlay(cts);
             _spacetimeServer.UnsubscribeTableWithId(k_player_account, context =>
             {
                 _logger.Log("UnsubTable View");
             });
-            _ = LoadingHome(player);
-        }
-
-        private async Awaitable LoadingHome(PlayerAccount player)
-        {
             await _stateMachine.EnterInitialState(
-                _gameProfileStateFactory.Create(new GameProfileInitiatorEnterData(player)), new CancellationTokenSource());
+                _gameProfileStateFactory.Create(new GameProfileInitiatorEnterData(player)), cts);
+            
+            await _loadingController.ShowOverlay(cts);
+            _loadingController.Hide();
+            await _loadingController.HideOverlay(cts);
         }
 
         public void FreezeInterface()

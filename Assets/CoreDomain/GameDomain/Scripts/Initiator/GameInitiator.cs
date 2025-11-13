@@ -56,7 +56,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
         public async Awaitable LoadEntryPoint(IInitiatorEnterData enterData, CancellationTokenSource cancellationTokenSource)
         {
             _logger.Log("Freeze input");
-            _loginController.HideView();
+            //_loginController.HideView();
             _loadingController.SetInfo("Validating data ...");
             _loadingController.SetProgress(0.5f);
             //validate data
@@ -77,7 +77,6 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             }
             _loadingController.SetInfo("Connecting player ...");
             _loadingController.SetProgress(1);
-            await Task.Delay(1000);
             var data = (GameInitiatorEnterData)enterData;
             
             string c_connection_sub_query = $"SELECT * FROM {k_connection} c WHERE c.Identity = '{data.LocalIdentity}'";
@@ -86,8 +85,14 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _spacetimeServer.SubscribeTableWithId(k_connection, new string[]{c_connection_sub_query}
                 , (context) => OnConnectionSubApply(context, tcs)
                 , (errorContext, exception) => OnConnectionSubError(errorContext, exception, tcs));
-            
-            await tcs.Task;
+            var res = await tcs.Task;
+            if (res)
+            {
+                await _loadingController.ShowOverlay(cancellationTokenSource);
+                _loginController.ShowView();
+                _loadingController.Hide();
+                await _loadingController.HideOverlay(cancellationTokenSource);
+            }
         }
         
         private void OnConnectionSubError(ErrorContext ctx, Exception e, TaskCompletionSource<bool> tcs)
@@ -103,8 +108,6 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             _logger.Log("Unfreeze input");
             _loadingController.SetInfo("");
             tcs.TrySetResult(true);
-            _loadingController.Hide();
-            _loginController.ShowView();
         }
 
         private void Reducer_ValidateData(ReducerEventContext ctx, List<HeroCard> cards, TaskCompletionSource<bool> tcs)

@@ -17,20 +17,6 @@
     top: 10%;
 }
 
-.hero_card_pre__item {
-    width: 250px;
-    height: 250px;
-    align-self: auto;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    font-size: 30px;
-    -unity-text-align: middle-center;
-    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=450365878&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_56");
-    -unity-background-scale-mode: scale-and-crop;
-}
-
 .hero_card_pre__background {
     position: absolute;
     width: 100%;

@@ -3,6 +3,7 @@
     width: 100%;
     height: 100%;
     background-image: url("project://database/Assets/CoreDomain/GameDomain/GameStateDomain/GameProfileDomain/Assets/UI/Art/holofront.png?fileID=2800000&guid=d2da341dba7352f4287e8f812959f32f&type=3#holofront");
+    opacity: 1;
 }
 
 .loading__progress {
@@ -22,4 +23,25 @@
     top: 10%;
     align-content: center;
     -unity-text-align: middle-center;
+}
+
+.loading__icon {
+    flex-grow: 1;
+    position: absolute;
+    align-self: center;
+    background-image: url("project://database/Assets/CoreDomain/Assets/UI/logo.jpeg?fileID=2800000&guid=628841fedaaa3674c8f27635dfed8cb1&type=3#logo");
+    height: 615px;
+    width: 615px;
+    top: 25%;
+    left: auto;
+    bottom: auto;
+    right: auto;
+}
+
+.loading__container {
+    flex-grow: 1;
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

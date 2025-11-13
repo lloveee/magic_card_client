@@ -1,4 +1,8 @@
-﻿namespace CoreDomain.Scripts.Mvc.Loading
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+namespace CoreDomain.Scripts.Mvc.Loading
 {
     public class LoadingController : ILoadingController
     {
@@ -16,5 +20,15 @@
 
         public void Show() => m_LoadingView.Show();
         public void Hide() => m_LoadingView.Hide();
+
+        public async UniTask ShowOverlay(CancellationTokenSource cts)
+        {
+            await m_LoadingView.DisplayOverlay(cts);
+        }
+
+        public async UniTask HideOverlay(CancellationTokenSource cts)
+        {
+            await m_LoadingView.HideOverlay(cts);
+        }
     }
 }

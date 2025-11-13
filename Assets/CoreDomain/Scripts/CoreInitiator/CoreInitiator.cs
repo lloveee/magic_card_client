@@ -4,6 +4,7 @@ using CoreDomain.Scripts.CoreInitiator.Base;
 using CoreDomain.Scripts.Mvc.Loading;
 using CoreDomain.Scripts.Services.SceneService;
 using CoreDomain.Scripts.Services.SpacetimeServer;
+using CoreDomain.Scripts.Utils;
 using SpacetimeDB;
 using SpacetimeDB.Types;
 using UnityEngine;
@@ -18,8 +19,7 @@ namespace CoreDomain.Scripts.CoreInitiator
         private ISpacetimeServer _spacetimeServer;
         private ILogger _logger;
         private ILoadingController _loadingController;
-        [SerializeField] private string url = "http://localhost:3000";
-        [SerializeField] private string module = "c-mc";
+        [SerializeField] private ServerConfig config;
         [SerializeField] private bool useProxy = false;
         [SerializeField] private SceneType proxyScene = SceneType.GameProfileScene;
         [SerializeReference, SubclassSelector] private IInitiatorEnterData mockData;
@@ -35,6 +35,7 @@ namespace CoreDomain.Scripts.CoreInitiator
 
         private void Start()
         {
+            _logger.Log(System.Net.Dns.GetHostAddresses("20250430.xyz")[0].ToString());
             //_ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken));
             _loadingController.Initialize();
             if (!useProxy)
@@ -42,7 +43,7 @@ namespace CoreDomain.Scripts.CoreInitiator
                 _loadingController.Show();
                 _loadingController.SetInfo("Connecting Server ...");
                 _loadingController.SetProgress(0.5f);
-                _spacetimeServer.InitializeConnection(url, module, OnConnected, OnConnectError, OnDisconnected);
+                _spacetimeServer.InitializeConnection(config.url, config.module, OnConnected, OnConnectError, OnDisconnected);
             }
             
             else
@@ -78,6 +79,9 @@ namespace CoreDomain.Scripts.CoreInitiator
                 UpdateApplicationSettings();
                 InitializeServices();
                 await LoadGameScene(cancellationTokenSource);
+                await _loadingController.ShowOverlay(cancellationTokenSource);
+                _loadingController.Hide();
+                await _loadingController.HideOverlay(cancellationTokenSource);
             }
             catch (OperationCanceledException)
             {

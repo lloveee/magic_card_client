@@ -18,8 +18,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
     [CreateAssetMenu(fileName = "HeroCardDatabase", menuName = "GamePlay/HeroCardDatabase", order = 0)]
     public class HeroCardDatabase : ScriptableObject
     {
-        [SerializeField] private string url = "http://localhost:3000";
-        [SerializeField] private string module = "c-mc";
+        [SerializeField] private ServerConfig config;
         [SerializeField] public List<HeroCardSO> data;
         private ISpacetimeServer _spacetime;
         private StdbHeroCardDataPersistence _heroCardData;
@@ -38,7 +37,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GamePlayDomain.Scripts.GamePlayD
 #if UNITY_EDITOR
         public void TryConnectSpacetimeDb()
         {
-            _spacetime.InitializeConnection(url, module, OnConnected, OnConnectError, OnDisconnected);
+            _spacetime.InitializeConnection(config.url, config.module, OnConnected, OnConnectError, OnDisconnected);
         }
 
         private void OnDisconnected(DbConnection conn, Exception e)

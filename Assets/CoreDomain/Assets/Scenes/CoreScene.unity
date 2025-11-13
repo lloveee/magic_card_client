@@ -430,8 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19bc53d81ea64ba6a4e1c89c2f657744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: http://localhost:3000
-  module: c-mc
+  config: {fileID: 11400000, guid: 078736a1b11347242bc79c9e9b5911d7, type: 2}
   useProxy: 0
   proxyScene: 5
   mockData:

@@ -15,9 +15,10 @@ namespace CoreDomain.Scripts.Mvc.Controls
             public static string HeroCardPreviewImage = "hero_card_pre__image";
             public static string HeroCardPreviewName = "hero_card_pre__name";
             public static string HeroCardPreviewItem = "hero_card_pre__item";
+            public static string HeroCardPreviewItemActive = "hero_card_pre__item__active";
         }
         
-        public event Action<HeroCardSO, int> OnClicked;
+        public event Action<HeroCardPreviewElement> OnClickedHeroCard = delegate { };
         public int Index;
         readonly Label m_HeroNameLabel;
         readonly VisualElement m_Background;
@@ -56,10 +57,18 @@ namespace CoreDomain.Scripts.Mvc.Controls
             
             //Image
         }
+
+        public void SetSelected(bool selected)
+        {
+            if (selected)
+                m_Background.AddToClassList(ClassNames.HeroCardPreviewItemActive);
+            else 
+                m_Background.RemoveFromClassList(ClassNames.HeroCardPreviewItemActive);
+        }
         
         private void OnClick(ClickEvent evt)
         {
-            OnClicked?.Invoke(HeroCardSO, Index);
+            OnClickedHeroCard?.Invoke(this);
         }
     }
 }

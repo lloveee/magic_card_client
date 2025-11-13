@@ -59,62 +59,6 @@
     align-self: auto;
 }
 
-.hero_card_pre__item {
-    width: 250px;
-    height: 250px;
-    align-self: auto;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    font-size: 30px;
-    -unity-text-align: middle-center;
-    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=450365878&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_56");
-    -unity-background-scale-mode: scale-and-crop;
-}
-
-.hero_card_pre__background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(202, 188, 177);
-}
-
-.hero_card_pre__background:hover {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(210, 177, 67);
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
-}
-
-.hero_card_pre__image {
-    position: absolute;
-    width: 85%;
-    height: 85%;
-    margin-top: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    margin-left: 5%;
-    background-color: rgba(255, 255, 255, 0);
-    align-self: center;
-    background-image: url("project://database/Assets/CoreDomain/Assets/UI/UI_atlas.psd?fileID=253151531&guid=fb8c91bd35b751b4a82920a57cd88822&type=3#UI_atlas_57");
-}
-
-.hero_card_pre__name {
-    position: absolute;
-    bottom: 0%;
-    align-self: center;
-    font-size: 26px;
-    -unity-text-align: middle-center;
-    width: 100%;
-    height: 25%;
-}
-
-.HeroCardManagementScreen {
-}
-
 .hero_card_pre__edit_list {
     position: absolute;
     width: 100%;

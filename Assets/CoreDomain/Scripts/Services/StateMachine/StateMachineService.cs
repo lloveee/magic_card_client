@@ -22,12 +22,10 @@ namespace CoreDomain.Scripts.Services.StateMachine
         public async Awaitable EnterInitialState(IGameState initialState, CancellationTokenSource cancellationTokenSource)
         {
             _currentState = initialState;
-            _loadingController.Show();
             _loadingController.SetProgress(0.5f);
             await _currentState.LoadState(cancellationTokenSource);
             await _currentState.StartState(cancellationTokenSource);
             _loadingController.SetProgress(1f);
-            _loadingController.Hide();
         }
 
         public void SwitchState(IGameState nextState)
@@ -47,16 +45,20 @@ namespace CoreDomain.Scripts.Services.StateMachine
                     _logger.LogError("No state to switch from, need to initialize a game state first!");
                     return;
                 }
+
+                await _loadingController.ShowOverlay(cancellationTokenSource);
                 _loadingController.Show();
-                await _currentState.ExitState(cancellationTokenSource);
                 _loadingController.SetProgress(0.5f);
-                await Task.Delay(500, cancellationTokenSource.Token);
+                await _loadingController.HideOverlay(cancellationTokenSource);
+                await _currentState.ExitState(cancellationTokenSource);
+                
                 _currentState = nextState;
                 await _currentState.LoadState(cancellationTokenSource);
                 _loadingController.SetProgress(1);
-                await Task.Delay(500, cancellationTokenSource.Token);
-                _loadingController.Hide();
                 await _currentState.StartState(cancellationTokenSource);
+                await _loadingController.ShowOverlay(cancellationTokenSource);
+                _loadingController.Hide();
+                await _loadingController.HideOverlay(cancellationTokenSource);
                 
             }
             catch (OperationCanceledException)

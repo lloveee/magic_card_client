@@ -1,3 +1,7 @@
 @import url("/Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss");
 
+@import url("/Assets/CoreDomain/Assets/UI/Uss/BaseTransition.uss");
+@import url("/Assets/CoreDomain/Assets/UI/Uss/HeroCardPreview.uss");
+
+
 VisualElement {}

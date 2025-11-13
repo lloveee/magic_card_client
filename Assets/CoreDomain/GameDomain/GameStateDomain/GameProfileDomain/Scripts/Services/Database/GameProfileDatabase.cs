@@ -112,7 +112,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Servic
                 set
                 {
                     if (_currentHeroIndex == value)
-                        return; // 无变化就不触发
+                        return;
                     _currentHeroIndex = value;
                     _onChanged?.Invoke(this);
                 }

@@ -28,6 +28,7 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
         private ScrollView m_HeroCardPreviewAttrList;
         private Button m_HeroCardUploadBtn;
         private Button m_HeroCardReUploadBtn;
+        private HeroCardPreviewElement _lastPreviewElement = null;
 
 
         public HeroCardManagementView(UIDocument document, ILogger logger) : base(document, logger)
@@ -51,14 +52,19 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
             m_HeroCardPreviewList.mode = ScrollViewMode.Horizontal;
             m_HeroCardPreviewList.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             m_HeroCardPreviewList.verticalScrollerVisibility = ScrollerVisibility.Auto;
-            foreach (var card in data)
+            for (int i = 0; i < data.Count; i++)
             {
                 var cardVisual = new HeroCardPreviewElement
                 {
-                    HeroCardSO = card
+                    HeroCardSO = data[i],
                 };
-                cardVisual.OnClicked += OnPreviewElementClicked;
+                cardVisual.OnClickedHeroCard += OnPreviewElementClickedHeroCard;
                 m_HeroCardPreviewList.contentContainer.Add(cardVisual);
+                if (i == 0)
+                {
+                    _lastPreviewElement = cardVisual;
+                    cardVisual.SetSelected(true);
+                }
             }
 
             m_HeroCardPreviewPanel =
@@ -70,6 +76,18 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
             m_HeroCardPreviewAttrList.mode = ScrollViewMode.Vertical;
             m_HeroCardPreviewAttrList.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
             m_HeroCardPreviewAttrList.verticalScrollerVisibility = ScrollerVisibility.Auto;
+        }
+
+        private void OnPreviewElementClickedHeroCard(HeroCardPreviewElement target)
+        {
+            if (target == _lastPreviewElement) return;
+            if (_lastPreviewElement != null)
+            {
+                _lastPreviewElement.SetSelected(false);
+            }
+            _lastPreviewElement = target;
+            target.SetSelected(true);
+            BindingPreviewPanel(target.HeroCardSO);
         }
 
         public void BindingPreviewPanel(HeroCardSO heroCard)
@@ -92,11 +110,6 @@ namespace CoreDomain.ManagementDomain.Scripts.Mvc.HeroCardScreen
                 }
                 type = type.BaseType;
             }
-        }
-        
-        private void OnPreviewElementClicked(HeroCardSO card, int _)
-        {
-            BindingPreviewPanel(card);
         }
 
         protected override void SetVisualElements()
