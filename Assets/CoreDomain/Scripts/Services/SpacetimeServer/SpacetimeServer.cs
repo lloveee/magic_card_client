@@ -44,7 +44,7 @@ namespace CoreDomain.Scripts.Services.SpacetimeServer
 
             if (AuthToken.Token != "")
             {
-                builder = builder.WithToken(AuthToken.Token);
+                //builder = builder.WithToken(AuthToken.Token);
             }
             Conn = builder.Build();
         }

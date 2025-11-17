@@ -29,12 +29,17 @@
     align-items: stretch;
     align-self: center;
     margin-bottom: 20px;
+    font-size: 20px;
+    -unity-text-align: upper-center;
+    -unity-font-style: normal;
 }
 
 .login__pwdbar {
     width: 70%;
     align-self: center;
     margin-bottom: 20px;
+    font-size: 20px;
+    -unity-text-align: upper-center;
 }
 
 .login__button {
@@ -51,4 +56,16 @@
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
     translate: 0 100%;
+    font-size: 20px;
+}
+
+.login__auto_login {
+    -unity-text-align: upper-center;
+    white-space: normal;
+    align-self: flex-end;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    right: 15%;
+    font-size: 22px;
 }

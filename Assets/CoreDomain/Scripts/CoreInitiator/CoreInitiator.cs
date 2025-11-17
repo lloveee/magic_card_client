@@ -35,7 +35,6 @@ namespace CoreDomain.Scripts.CoreInitiator
 
         private void Start()
         {
-            _logger.Log(System.Net.Dns.GetHostAddresses("20250430.xyz")[0].ToString());
             //_ = InitEntryPoint(CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken));
             _loadingController.Initialize();
             if (!useProxy)

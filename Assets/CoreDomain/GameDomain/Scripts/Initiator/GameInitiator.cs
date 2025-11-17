@@ -90,6 +90,7 @@ namespace CoreDomain.GameDomain.Scripts.Initiator
             {
                 await _loadingController.ShowOverlay(cancellationTokenSource);
                 _loginController.ShowView();
+                _loginController.TryAutoLogin();
                 _loadingController.Hide();
                 await _loadingController.HideOverlay(cancellationTokenSource);
             }

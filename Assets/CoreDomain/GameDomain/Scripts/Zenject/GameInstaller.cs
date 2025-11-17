@@ -1,6 +1,7 @@
 ﻿using CoreDomain.GameDomain.Scripts.Initiator;
 using CoreDomain.GameDomain.Scripts.Mvc.Login;
 using CoreDomain.GameDomain.Scripts.State.GamePlay;
+using CoreDomain.GameDomain.Scripts.State.GamePractice;
 using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,6 +17,8 @@ namespace CoreDomain.GameDomain.Scripts.Zenject
             Container.BindFactory<GamePlayInitiatorEnterData, GamePlayState, GamePlayState.Factory>()
                 .AsSingle().NonLazy();
             Container.BindFactory<GameProfileInitiatorEnterData, GameProfileState, GameProfileState.Factory>()
+                .AsSingle().NonLazy();
+            Container.BindFactory<GamePracticeInitiatorEnterData, GamePracticeState, GamePracticeState.Factory>()
                 .AsSingle().NonLazy();
             Container.BindInterfacesTo<GameInitiator>().AsSingle().NonLazy();
 

@@ -4,6 +4,7 @@
     <ui:VisualElement name="login__content" class="login__content" style="flex-grow: 1;">
         <ui:TextField label="账号" placeholder-text="filler text" name="login__userbar" max-length="16" auto-correction="false" hide-placeholder-on-focus="true" keyboard-type="NumbersAndPunctuation" class="login__userbar" />
         <ui:TextField label="密码" placeholder-text="filler text" name="login__pwdbar" password="true" max-length="16" hide-placeholder-on-focus="true" class="login__pwdbar" />
-        <ui:Button text="Button" name="login__button" class="login__button" />
+        <ui:Toggle label="自动登录" toggle-on-label-click="true" name="login__auto_login" value="false" class="login__auto_login" />
+        <ui:Button text="登录" name="login__button" class="login__button" />
     </ui:VisualElement>
 </ui:UXML>

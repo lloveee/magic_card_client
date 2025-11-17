@@ -40,6 +40,7 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Servic
             Config.BindChangeHandler(OnConfigChanged);
             if (Config.CurrentHeroIndex >= heroCardDatabase.data.Count)
                 Config.CurrentHeroIndex = 0;
+            Db.Config = Config;
         }
 
         public async Awaitable<bool> SubRemoteServer(string username, CancellationTokenSource cancellationTokenSource)
@@ -94,11 +95,12 @@ namespace CoreDomain.GameDomain.GameStateDomain.GameProfileDomain.Scripts.Servic
             public PlayerAccount CurrentPlayer { get; set; }
             public List<HeroCardSO> HeroCardData { get; set; }
             public ProfileConfig Config { get; set; }
+            public HeroCardSO CurrentHero => HeroCardData[Config.CurrentHeroIndex];
         }
 
         public class ProfileConfig
         {
-            private int _currentHeroIndex;
+            private int _currentHeroIndex = 0;
             private event Action<ProfileConfig> _onChanged;
 
             public void BindChangeHandler(Action<ProfileConfig> onChanged)

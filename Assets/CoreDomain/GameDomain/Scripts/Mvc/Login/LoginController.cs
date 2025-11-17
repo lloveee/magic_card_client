@@ -3,6 +3,7 @@ using System.Threading;
 using CoreDomain.GameDomain.Scripts.State.GameProfile;
 using CoreDomain.Scripts.Mvc.Loading;
 using CoreDomain.Scripts.Services.CommandFactory;
+using CoreDomain.Scripts.Services.DataPersistence;
 using CoreDomain.Scripts.Services.SpacetimeServer;
 using CoreDomain.Scripts.Services.StateMachine;
 using Cysharp.Threading.Tasks;
@@ -25,13 +26,29 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         private readonly ILoadingController _loadingController;
         private readonly GameProfileState.Factory _gameProfileStateFactory;
         private readonly IStateMachineService _stateMachine;
+        private readonly PlayerPrefsDataPersistence _dataPersistence;
         private const string k_player_account = "player_account";
         private const string k_LoginView = "LoginScreen";
         private const string k_InitView = "InitScreen";
+        private const string k_login_config = "player_login";
+        private LoginConfig _loginConfig;
+        private class LoginConfig
+        {
+            public LoginConfig(string username, string password, bool auto)
+            {
+                this.username = username;
+                this.password = password;
+                this.auto = auto;
+            }
+            public string username;
+            public string password;
+            public bool auto;
+        }
         
         [Inject]
         public LoginController(LoginView view,PlayerInitView initView, ISpacetimeServer spacetimeServer, ILogger logger, ICommandFactory commandFactory, 
-            IStateMachineService stateMachine, GameProfileState.Factory gameProfileStateFactory, ILoadingController loadingController)
+            IStateMachineService stateMachine, GameProfileState.Factory gameProfileStateFactory, ILoadingController loadingController, 
+            PlayerPrefsDataPersistence dataPersistence)
         {
             _loadingController = loadingController;
             m_view = view;
@@ -41,15 +58,32 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
             _gameProfileStateFactory = gameProfileStateFactory;
             _spacetimeServer = spacetimeServer;
             _commandFactory = commandFactory;
+            _dataPersistence = dataPersistence;
         }
 
         public void Initialize()
         {
+            _loginConfig = _dataPersistence.Load<LoginConfig>(k_login_config);
+            
             m_view.Initialize(k_LoginView);
             m_playerInit_View.Initialize(k_InitView);
             m_view.Hide();
             m_playerInit_View.Hide();
             SetupCallbacks();
+        }
+
+        public void TryAutoLogin()
+        {
+            if (_loginConfig != null)
+            {
+                m_view.SetAutoLogin(_loginConfig.auto);
+                m_view.SetLoginContext(_loginConfig.username, _loginConfig.password);
+                if (_loginConfig.auto)
+                {
+                    m_view.FreezeInterface();
+                    _spacetimeServer.Conn.Reducers.AuthLogin(_loginConfig.username, _loginConfig.password);
+                }
+            }
         }
 
         private void SetupCallbacks()
@@ -71,6 +105,9 @@ namespace CoreDomain.GameDomain.Scripts.Mvc.Login
         {
             m_view.FreezeInterface();
             var c = m_view.GetLoginContext();
+            var b = m_view.GetAutoLogin();
+            _loginConfig = new LoginConfig(c.username, c.password, b);
+            _dataPersistence.Save(k_login_config, _loginConfig);
             _spacetimeServer.Conn.Reducers.AuthLogin(c.username, c.password);
         }
 

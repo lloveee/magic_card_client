@@ -7,5 +7,6 @@
         public void UnfreezeInterface();
         public void HideView();
         public void ShowView();
+        public void TryAutoLogin();
     }
 }
